@@ -14,6 +14,11 @@
 		072402C02C63905400145106 /* WeatherForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072402BF2C63905400145106 /* WeatherForecastTests.swift */; };
 		072402CA2C63905400145106 /* WeatherForecastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072402C92C63905400145106 /* WeatherForecastUITests.swift */; };
 		072402CC2C63905400145106 /* WeatherForecastUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072402CB2C63905400145106 /* WeatherForecastUITestsLaunchTests.swift */; };
+		072402DA2C639E5500145106 /* OpenMeteoSdk in Frameworks */ = {isa = PBXBuildFile; productRef = 072402D92C639E5500145106 /* OpenMeteoSdk */; };
+		072403162C64AF4100145106 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072403152C64AF4100145106 /* WeatherService.swift */; };
+		072403182C64E9A900145106 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072403172C64E9A900145106 /* WeatherData.swift */; };
+		0773B3D62C75E1AA00D3762A /* GlassyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */; };
+		0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778D1BC2C6C91FF006AE037 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		072402C52C63905400145106 /* WeatherForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		072402C92C63905400145106 /* WeatherForecastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastUITests.swift; sourceTree = "<group>"; };
 		072402CB2C63905400145106 /* WeatherForecastUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		072403152C64AF4100145106 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		072403172C64E9A900145106 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassyCardView.swift; sourceTree = "<group>"; };
+		0778D1BC2C6C91FF006AE037 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		07E6E9262C6B795D00ECD6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				072402DA2C639E5500145106 /* OpenMeteoSdk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +105,15 @@
 		072402AD2C63903F00145106 /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				07E6E9262C6B795D00ECD6DC /* Info.plist */,
 				072402AE2C63903F00145106 /* WeatherForecastApp.swift */,
 				072402B02C63903F00145106 /* ContentView.swift */,
 				072402B22C63905300145106 /* Assets.xcassets */,
 				072402B42C63905300145106 /* Preview Content */,
+				072403152C64AF4100145106 /* WeatherService.swift */,
+				072403172C64E9A900145106 /* WeatherData.swift */,
+				0778D1BC2C6C91FF006AE037 /* LocationManager.swift */,
+				0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -143,6 +159,9 @@
 			dependencies = (
 			);
 			name = WeatherForecast;
+			packageProductDependencies = (
+				072402D92C639E5500145106 /* OpenMeteoSdk */,
+			);
 			productName = WeatherForecast;
 			productReference = 072402AB2C63903F00145106 /* WeatherForecast.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 072402A22C63903F00145106;
+			packageReferences = (
+				072402D82C639E5500145106 /* XCRemoteSwiftPackageReference "sdk" */,
+			);
 			productRefGroup = 072402AC2C63903F00145106 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,6 +280,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				072402B12C63903F00145106 /* ContentView.swift in Sources */,
+				072403162C64AF4100145106 /* WeatherService.swift in Sources */,
+				0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */,
+				0773B3D62C75E1AA00D3762A /* GlassyCardView.swift in Sources */,
+				072403182C64E9A900145106 /* WeatherData.swift in Sources */,
 				072402AF2C63903F00145106 /* WeatherForecastApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,8 +448,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherForecast/Preview Content\"";
+				DEVELOPMENT_TEAM = 4329DP88K8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherForecast/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App needs your location to provide weather data from your location to you";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -450,8 +479,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherForecast/Preview Content\"";
+				DEVELOPMENT_TEAM = 4329DP88K8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherForecast/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App needs your location to provide weather data from your location to you";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -582,6 +614,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		072402D82C639E5500145106 /* XCRemoteSwiftPackageReference "sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/open-meteo/sdk.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		072402D92C639E5500145106 /* OpenMeteoSdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 072402D82C639E5500145106 /* XCRemoteSwiftPackageReference "sdk" */;
+			productName = OpenMeteoSdk;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 072402A32C63903F00145106 /* Project object */;
 }
