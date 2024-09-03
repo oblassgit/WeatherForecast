@@ -20,11 +20,11 @@ struct MyWeatherData {
     var temp: Float?
     var visibility: Float?
     var windSpeed: Float?
-    var windDirection: String
-    var latitude: Float
-    var longitude: Float
-    var apparentTemperature: Float
-    var surfacePressure: Float
+    var windDirection: String = ""
+    var latitude: Float = 0.0
+    var longitude: Float = 0.0
+    var apparentTemperature: Float = 0.0
+    var surfacePressure: Float = 0.0
 }
 
 enum Direction: String, CaseIterable {
