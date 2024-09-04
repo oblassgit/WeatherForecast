@@ -10,21 +10,23 @@ import CoreLocation
 
 class ViewModel: ObservableObject {
     @Published var data: [MyWeatherData]?
+    @Published var placeName: String?
+    
+    private var locationManager = LocationManager()
+
     
     
     func refreshData() {
         Task.init {
-            var locationManager = LocationManager()
             locationManager.checkLocationAuthorization()
-            data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
+            data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
             if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.notDetermined) {
-                data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
+                data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
             }
-            /*
-            if let _ = data?[0].temp {
-                data![0].temp! += Float.random(in: 5...10)
+            
+            locationManager.lookUpCurrentLocation { place in
+                self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
             }
-             */
         }
     }
 }

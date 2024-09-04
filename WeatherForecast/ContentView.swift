@@ -11,7 +11,6 @@ import CoreLocation
 struct ContentView: View {
     var location: CLLocation?
     
-    //@State private var data: [MyWeatherData]?
     @ObservedObject var viewModel: ViewModel
     
     @Environment(\.scenePhase) var scenePhase
@@ -26,7 +25,7 @@ struct ContentView: View {
                 
                 
                 
-                TodayForecastView(data: viewModel.data, isDayTime: isDayTime, isRainy: isRainy)
+                TodayForecastView(viewModel: viewModel, isDayTime: isDayTime, isRainy: isRainy)
                 SevenDayForecastView(data: viewModel.data)
                 
             }
@@ -86,18 +85,19 @@ struct ContentView: View {
 
 struct TodayForecastView: View {
     
-    var data: [MyWeatherData]?
+    @ObservedObject var viewModel: ViewModel
     var isDayTime: Bool
     var isRainy: Bool
 
     var body: some View {
+        var data = viewModel.data
         
         VStack {
             
             
             HStack {
                 Image(systemName: "location.fill")
-                Text("lat. \(String(format: "%.2f", data?[0].latitude ?? 0.0)) long. \(String(format: "%.2f", data?[0].longitude ?? 0.0))")
+                Text(viewModel.placeName ?? "")
             }
             Text(" \(Int(data?[0].temp ?? 0.0))°")
                 .font(Font.system(size: 60))
