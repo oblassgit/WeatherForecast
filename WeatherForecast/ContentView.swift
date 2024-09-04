@@ -90,7 +90,8 @@ struct TodayForecastView: View {
     var isRainy: Bool
 
     var body: some View {
-        var data = viewModel.data
+        let data = viewModel.data
+
         
         VStack {
             
@@ -102,10 +103,15 @@ struct TodayForecastView: View {
             Text(" \(Int(data?[0].temp ?? 0.0))°")
                 .font(Font.system(size: 60))
                 .padding(1)
-            Image(systemName: decideWeatherIconSystemName(isDay: isDayTime, isRainy: isRainy, day: "Today"))
-                .foregroundStyle(decideWeatherIconColor(isDay: isDayTime, isRainy: isRainy, day: "Today"))
+            
+            let colorArray = decideWeathericonColorArray(weatherCode: data?[0].currentWeatherCode ?? -1, systemName: ViewModel().getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true))
+            Image(systemName: String(ViewModel().getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true)))
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(colorArray[0], colorArray[1])
                 .font(Font.largeTitle)
                 .padding(1)
+            Text(viewModel.getWeatherDescription(wmoCode: String(data?[0].currentWeatherCode ?? 99), isDay: isDayTime))
+                .font(.title3)
             Text("High \(Int(data?[0].maxTemp ?? 0.0))°")
             Text("Low \(Int(data?[0].minTemp ?? 0.0))°")
                 .foregroundStyle(Color.secondary)

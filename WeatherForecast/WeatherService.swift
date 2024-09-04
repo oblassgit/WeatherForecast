@@ -25,6 +25,8 @@ struct MyWeatherData {
     var longitude: Float = 0.0
     var apparentTemperature: Float = 0.0
     var surfacePressure: Float = 0.0
+    var dailyWeatherCode: Int?
+    var currentWeatherCode: Int?
 }
 
 enum Direction: String, CaseIterable {
@@ -63,12 +65,10 @@ class WeatherService {
         
         
         /// Make sure the URL contains `&format=flatbuffers`
-        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure&hourly=visibility,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum&timezone=Europe%2FBerlin&format=flatbuffers")!
+        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code&hourly=visibility,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code&timezone=Europe%2FBerlin&format=flatbuffers")!
         
-        print(latitude)
-        print(longitude)
         
-        var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0))
+        var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1))
         var allData : [MyWeatherData] = []
         
         do {
@@ -97,7 +97,8 @@ class WeatherService {
                     temperature2mMax: daily.variables(at: 0)!.values,
                     temperature2mMin: daily.variables(at: 1)!.values,
                     rainSum: daily.variables(at: 3)!.values,
-                    uvIndexMax: daily.variables(at: 2)!.values
+                    uvIndexMax: daily.variables(at: 2)!.values,
+                    weatherCode: daily.variables(at: 4)!.values
                 ),
                 hourly: .init(
                     visibility: hourly.variables(at: 0)!.values,
@@ -108,7 +109,8 @@ class WeatherService {
                         isDay: current.variables(at: 0)!.value,
                         temperature2m: current.variables(at: 1)!.value,
                         apparentTemperature: current.variables(at: 2)!.value,
-                        suracePressure: current.variables(at: 3)!.value
+                        suracePressure: current.variables(at: 3)!.value,
+                        weatherCode: current.variables(at: 4)!.value
                     )
             )
                         
@@ -137,9 +139,7 @@ class WeatherService {
                             } else {
                                 isDay = false
                             }
-                        
-                            // print(Direction(hourly.windDirection[0]))
-                            // print(hourly.windDirection[0])
+
                             
                             allData.append(MyWeatherData(
                                 dateObj: date,
@@ -156,7 +156,12 @@ class WeatherService {
                                 latitude: latitude,
                                 longitude: longitude,
                                 apparentTemperature: current.apparentTemperature,
-                                surfacePressure: current.suracePressure))
+                                surfacePressure: current.suracePressure,
+                                dailyWeatherCode: Int(dailies.weatherCode[i]),
+                                currentWeatherCode: Int(current.weatherCode)
+                                
+                                
+                            ))
                             
                             // print(dailies.uvIndexMax[i])
                             

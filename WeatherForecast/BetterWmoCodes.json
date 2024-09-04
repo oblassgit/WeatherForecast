@@ -1,0 +1,22 @@
+[
+    {
+        "id": "0",
+        "description": "Sunny",
+        "image": "sun.max.fill"
+    },
+    {
+        "id": "0_",
+        "description":"Clear",
+        "image":"moon.stars.fill"
+    },
+    {
+        "id": "1"
+        "description":"Mainly Sunny",
+        "image":"sun.max.fill"
+    },
+    {
+        "id": "1_"
+        "description":"Mainly Clear",
+        "image":"moon.stars.fill"
+    }
+]
