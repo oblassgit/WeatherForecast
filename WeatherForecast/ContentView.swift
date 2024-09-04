@@ -11,40 +11,42 @@ import CoreLocation
 struct ContentView: View {
     var location: CLLocation?
     
-    @State private var data: [MyWeatherData]?
+    //@State private var data: [MyWeatherData]?
+    @ObservedObject var viewModel: ViewModel
     
+    @Environment(\.scenePhase) var scenePhase
     
     
     var body: some View {
                 
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                let isDayTime = data?[0].isDay ?? false
-                let isRainy = data?[0].isRainy ?? false
+                let isDayTime = viewModel.data?[0].isDay ?? false
+                let isRainy = viewModel.data?[0].isRainy ?? false
                 
                 
                 
-                TodayForecastView(data: data, isDayTime: isDayTime, isRainy: isRainy)
-                SevenDayForecastView(data: data)
+                TodayForecastView(data: viewModel.data, isDayTime: isDayTime, isRainy: isRainy)
+                SevenDayForecastView(data: viewModel.data)
                 
             }
             
             HStack {
-                GlassyCardView(viewDescription: "visibility", iconName: "eye.fill", smallIconName: "", bigText: "\(Int(data?[0].visibility ?? 1) / 1000) km", smallText: "", showSmall: true, unit: "")
+                GlassyCardView(viewDescription: "visibility", iconName: "eye.fill", smallIconName: "", bigText: "\(Int(viewModel.data?[0].visibility ?? 1) / 1000) km", smallText: "", showSmall: true, unit: "")
                     .padding(.leading)
                 
-                GlassyCardView(viewDescription: "wind", iconName: "wind", smallIconName: "safari", bigText: "\(Int(data?[0].windSpeed ?? 0)) km/h", smallText: String(data?[0].windDirection ?? "??"), showSmall: true, unit: "")
+                GlassyCardView(viewDescription: "wind", iconName: "wind", smallIconName: "safari", bigText: "\(Int(viewModel.data?[0].windSpeed ?? 0)) km/h", smallText: String(viewModel.data?[0].windDirection ?? "??"), showSmall: true, unit: "")
                     .padding(.trailing)
             }
             
-            UvIndexView(data: data)
+            UvIndexView(data: viewModel.data)
             
 
             HStack {
-                GlassyCardView(viewDescription: "apparent", iconName: "thermometer.sun", smallIconName: "", bigText: "\(Int(data?[0].apparentTemperature ?? 0)) °", smallText: "", showSmall: false, unit: "")
+                GlassyCardView(viewDescription: "apparent", iconName: "thermometer.sun", smallIconName: "", bigText: "\(Int(viewModel.data?[0].apparentTemperature ?? 0)) °", smallText: "", showSmall: false, unit: "")
                     .padding(.leading)
                 
-                GlassyCardView(viewDescription: "pressure", iconName: "gauge.with.dots.needle.bottom.50percent", smallIconName: "", bigText: " \(Int(data?[0].surfacePressure ?? 0).formatted())", smallText: "", showSmall: false, unit: "hPa")
+                GlassyCardView(viewDescription: "pressure", iconName: "gauge.with.dots.needle.bottom.50percent", smallIconName: "", bigText: " \(Int(viewModel.data?[0].surfacePressure ?? 0).formatted())", smallText: "", showSmall: false, unit: "hPa")
                     .padding(.trailing)
             }
             
@@ -55,7 +57,7 @@ struct ContentView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(Gradient(colors: [.blue, .indigo, .cyan]).opacity(0.8))
         .onAppear(perform: {
-            Task.init {
+            /*Task.init {
                 var locationManager = LocationManager()
                 locationManager.checkLocationAuthorization()
                 data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
@@ -63,13 +65,23 @@ struct ContentView: View {
                     data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
                 }
                 
+            }*/
+            viewModel.refreshData()
+        }).onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active {
+                print("Active")
+                viewModel.refreshData()
+            } else if newPhase == .inactive {
+                print("Inactive")
+            } else if newPhase == .background {
+                print("Background")
             }
-        })
+        }
     }
     }
     
 #Preview {
-    ContentView()
+    ContentView(viewModel: ViewModel())
 }
 
 struct TodayForecastView: View {

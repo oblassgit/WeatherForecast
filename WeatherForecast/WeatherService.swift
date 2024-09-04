@@ -124,7 +124,7 @@ class WeatherService {
                         var rainy = false
                         var isDay = false
                         for (i, date) in dailies.time.enumerated() {
-                            print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
+                            // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
 
                             if(Float(dailies.rainSum[i]) > Float(8.0)) {
                                 rainy = true
@@ -138,8 +138,8 @@ class WeatherService {
                                 isDay = false
                             }
                         
-                            print(Direction(hourly.windDirection[0]))
-                            print(hourly.windDirection[0])
+                            // print(Direction(hourly.windDirection[0]))
+                            // print(hourly.windDirection[0])
                             
                             allData.append(MyWeatherData(
                                 dateObj: date,
@@ -158,7 +158,7 @@ class WeatherService {
                                 apparentTemperature: current.apparentTemperature,
                                 surfacePressure: current.suracePressure))
                             
-                            print(dailies.uvIndexMax[i])
+                            // print(dailies.uvIndexMax[i])
                             
                     }
                         

@@ -12,7 +12,7 @@ struct WeatherForecastApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ViewModel())
         }
         
     }

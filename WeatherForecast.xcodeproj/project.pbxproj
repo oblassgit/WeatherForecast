@@ -21,6 +21,7 @@
 		0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */; };
 		0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */; };
 		0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778D1BC2C6C91FF006AE037 /* LocationManager.swift */; };
+		07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB549C2C875C7D000991D0 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMyWeatherData.swift; sourceTree = "<group>"; };
 		0778D1BC2C6C91FF006AE037 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		07E6E9262C6B795D00ECD6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		07FB549C2C875C7D000991D0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */,
 				0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */,
 				0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */,
+				07FB549C2C875C7D000991D0 /* ViewModel.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				072402B12C63903F00145106 /* ContentView.swift in Sources */,
+				07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */,
 				072403162C64AF4100145106 /* WeatherService.swift in Sources */,
 				0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */,
 				0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */,
