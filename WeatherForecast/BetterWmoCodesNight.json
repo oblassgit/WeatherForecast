@@ -28,11 +28,35 @@
         "description":"Foggy",
         "image":"cloud.fog.fill"
     },
-
+    {
+        "id": "51",
+        "description":"Light Drizzle",
+        "image":"cloud.drizzle.fill"
+    },
+    {
+        "id": "53",
+        "description":"Drizzle",
+        "image":"cloud.drizzle.fill"
+    },
+    {
+        "id": "55",
+        "description":"Heavy Drizzle",
+        "image":"cloud.drizzle.fill"
+    },
+    {
+        "id": "56",
+        "description":"Light Freezing Drizzle",
+        "image":"cloud.sleet.fill"
+    },
+    {
+        "id": "57",
+        "description":"Freezing Drizzle",
+        "image":"cloud.sleet.fill"
+    },
     {
         "id": "61",
         "description":"Light Rain",
-        "image":"cloud.drizzle.fill"
+        "image":"cloud.moon.rain.fill"
     },
 
     {
@@ -46,7 +70,36 @@
         "description":"Heavy Rain",
         "image":"cloud.heavyrain.fill"
     },
-
+    {
+        "id": "66",
+        "description":"Light Freezing Rain",
+        "image":"cloud.sleet.fill"
+    },
+    {
+        "id": "67",
+        "description":"Freezing Rain",
+        "image":"cloud.sleet.fill"
+    },
+    {
+        "id": "71",
+        "description":"Light Snow",
+        "image":"cloud.snow.fill"
+    },
+    {
+        "id": "73",
+        "description":"Snow",
+        "image":"cloud.snow.fill"
+    },
+    {
+        "id": "75",
+        "description":"Heavy Snow",
+        "image":"cloud.snow.fill"
+    },
+    {
+        "id": "77",
+        "description":"Snow Grains",
+        "image":"cloud.snow.fill"
+    },
     {
         "id": "80",
         "description":"Light Showers",

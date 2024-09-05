@@ -67,7 +67,7 @@ struct DayForecast: View {
                                                        
             Image(systemName: String(ViewModel().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay))/*decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day)*/)
                 .symbolRenderingMode(.palette)
-                .foregroundStyle(colorArray[0], colorArray[1])
+                .foregroundStyle(colorArray[0], colorArray[1], colorArray[2])
                 .font(Font.largeTitle)
                 .padding(5)
             Text("High: \(high)°")
@@ -87,44 +87,28 @@ struct DayForecast: View {
         .background(.blue)
 }
 
-/*func decideWeatherIconColor(isDay: Bool, isRainy: Bool, day: String) -> Color {
-    if !isDay && day.elementsEqual("Today") {
-        return Color.white
-    }
-    if isRainy {
-        return Color.blue
-    } else {
-        return Color.yellow
-    }
-}*/
-
 func decideWeathericonColorArray(weatherCode: Int, systemName: String) -> [Color] {
-    var colorArray = [Color.white, Color.white]
+    var colorArray = [Color.white, Color.white, Color.white]
     
-    if systemName == "sun.max.fill" {
-        colorArray[0] = Color.yellow
+    let systemNameArray = systemName.components(separatedBy: ".")
+    
+ 
+    var i = 0
+    systemNameArray.forEach { systemNamePart in
+        if systemNamePart == "sun" {
+            colorArray[i] = Color.yellow
+        } else if systemNamePart == "rain" || systemNamePart == "drizzle" {
+            colorArray[i] = Color.blue
+        }
+        i += 1
+        
     }
     
-    if systemName.contains(Regex<Any>(verbatim: "sun")) {
-        colorArray[1] = Color.yellow
-    } else if systemName.contains(Regex<Any>(verbatim: "rain")) || systemName.contains(Regex<Any>(verbatim: "drizzle")) {
-        colorArray[1] = Color.blue
+    if systemName == "cloud.bolt.rain.fill" {
+        colorArray = [Color.white, Color.blue, Color.white]
     }
+    
     return colorArray
-}
-
-func decideWeatherIconSystemName(isDay: Bool, isRainy: Bool, day: String) -> String {
-    if !isDay && isRainy && day.elementsEqual("Today") {
-        return "cloud.moon.rain.fill"
-    }
-    if !isDay && !isRainy && day.elementsEqual("Today") {
-        return "moon.stars.fill"
-    }
-    if isRainy {
-        return "cloud.rain.fill"
-    } else {
-        return "sun.max.fill"
-    }
 }
 
 func decideUVIndexDescription(uvIndex: Int) -> String {

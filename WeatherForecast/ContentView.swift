@@ -54,17 +54,9 @@ struct ContentView: View {
             
         }
         .containerRelativeFrame([.horizontal, .vertical])
-        .background(Gradient(colors: [.blue, .indigo, .cyan]).opacity(0.8))
+        .background(Gradient(colors: [.backgroundColor1, .backgroundColor3, .backgroundColor2]).opacity(0.8))
+        
         .onAppear(perform: {
-            /*Task.init {
-                var locationManager = LocationManager()
-                locationManager.checkLocationAuthorization()
-                data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
-                if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.notDetermined) {
-                    data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation)
-                }
-                
-            }*/
             viewModel.refreshData()
         }).onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
