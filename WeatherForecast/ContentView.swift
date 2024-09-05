@@ -49,6 +49,13 @@ struct ContentView: View {
                     .padding(.trailing)
             }
             
+            HStack {
+                GlassyCardView(viewDescription: "sunrise", iconName: "sunrise.fill", smallIconName: "", bigText: viewModel.data?[0].sunriseTime ?? "00:00", smallText: "", showSmall: false, unit: "")
+                    .padding(.leading)
+                GlassyCardView(viewDescription: "sunset", iconName: "sunset.fill", smallIconName: "", bigText: viewModel.data?[0].sunsetTime ?? "00:00", smallText: "", showSmall: false, unit: "")
+                    .padding(.trailing)
+            }
+            
             Spacer()
             
             
@@ -60,12 +67,12 @@ struct ContentView: View {
             viewModel.refreshData()
         }).onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
-                print("Active")
+                debugPrint("Active")
                 viewModel.refreshData()
             } else if newPhase == .inactive {
-                print("Inactive")
+                debugPrint("Inactive")
             } else if newPhase == .background {
-                print("Background")
+                debugPrint("Background")
             }
         }
     }
