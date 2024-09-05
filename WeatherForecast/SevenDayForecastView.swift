@@ -30,7 +30,7 @@ struct SevenDayForecastView: View {
                     if let data = data {
                         ForEach(0 ..< data.count) { value in
                             let day = data[value]
-                            DayForecast(day: value == 0 ? "Today" : day.date ?? "??", isRainy: day.isRainy ?? false, high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false)
+                            DayForecast(day: value == 0 ? "Today" : day.date ?? "??", isRainy: day.isRainy ?? false, high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
                         }
                     }
                 }
@@ -56,15 +56,18 @@ struct DayForecast: View {
     let high: Int
     let low: Int
     let isDay: Bool
+    let wmoCode: Int
     
     
     var body: some View {
         VStack {
             Text(day)
                 .font(Font.headline)
-            
-            Image(systemName: decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day))
-                .foregroundStyle(decideWeatherIconColor(isDay: isDay, isRainy: isRainy, day: day))
+            let colorArray = decideWeathericonColorArray(weatherCode: wmoCode, systemName: (ViewModel().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
+                                                       
+            Image(systemName: String(ViewModel().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay))/*decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day)*/)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(colorArray[0], colorArray[1])
                 .font(Font.largeTitle)
                 .padding(5)
             Text("High: \(high)°")
@@ -84,7 +87,7 @@ struct DayForecast: View {
         .background(.blue)
 }
 
-func decideWeatherIconColor(isDay: Bool, isRainy: Bool, day: String) -> Color {
+/*func decideWeatherIconColor(isDay: Bool, isRainy: Bool, day: String) -> Color {
     if !isDay && day.elementsEqual("Today") {
         return Color.white
     }
@@ -93,6 +96,21 @@ func decideWeatherIconColor(isDay: Bool, isRainy: Bool, day: String) -> Color {
     } else {
         return Color.yellow
     }
+}*/
+
+func decideWeathericonColorArray(weatherCode: Int, systemName: String) -> [Color] {
+    var colorArray = [Color.white, Color.white]
+    
+    if systemName == "sun.max.fill" {
+        colorArray[0] = Color.yellow
+    }
+    
+    if systemName.contains(Regex<Any>(verbatim: "sun")) {
+        colorArray[1] = Color.yellow
+    } else if systemName.contains(Regex<Any>(verbatim: "rain")) || systemName.contains(Regex<Any>(verbatim: "drizzle")) {
+        colorArray[1] = Color.blue
+    }
+    return colorArray
 }
 
 func decideWeatherIconSystemName(isDay: Bool, isRainy: Bool, day: String) -> String {

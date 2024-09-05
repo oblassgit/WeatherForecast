@@ -1,0 +1,95 @@
+[
+
+    {
+        "id": "0",
+        "description":"Clear",
+        "image":"moon.stars.fill"
+    },
+
+    {
+        "id": "1",
+        "description":"Mainly Clear",
+        "image":"moon.stars.fill"
+    },
+
+    {
+        "id": "2",
+        "description":"Partly Cloudy",
+        "image":"cloud.moon.fill"
+    },
+
+    {
+        "id": "3",
+        "description":"Cloudy",
+        "image":"cloud.fill"
+    },
+    {
+        "id": "45",
+        "description":"Foggy",
+        "image":"cloud.fog.fill"
+    },
+
+    {
+        "id": "61",
+        "description":"Light Rain",
+        "image":"cloud.drizzle.fill"
+    },
+
+    {
+        "id": "63",
+        "description":"Rain",
+        "image":"cloud.rain.fill"
+    },
+
+    {
+        "id": "65",
+        "description":"Heavy Rain",
+        "image":"cloud.heavyrain.fill"
+    },
+
+    {
+        "id": "80",
+        "description":"Light Showers",
+        "image":"cloud.drizzle.fill"
+    },
+
+    {
+        "id": "81",
+        "description":"Showers",
+        "image":"cloud.rain.fill"
+    },
+
+    {
+        "id": "82",
+        "description":"Heavy Showers",
+        "image":"cloud.heavyrain.fill"
+    },
+
+    {
+        "id": "85_",
+        "description":"Light Snow Showers",
+        "image":"cloud.snow.fill"
+    },
+
+    {
+        "id": "86",
+        "description":"Snow Showers",
+        "image":"cloud.snow.fill"
+    },
+    {
+        "id": "95",
+        "description":"Thunderstorm",
+        "image":"cloud.bolt.rain.fill"
+    },
+    {
+        "id": "96",
+        "description":"Light Thunderstorm With Hail",
+        "image":"cloud.bolt.rain.fill"
+    },
+    {
+        "id": "99",
+        "description":"Light Thunderstorm With Hail",
+        "image":"cloud.bolt.rain.fill"
+    }
+]
+

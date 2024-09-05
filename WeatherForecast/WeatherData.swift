@@ -17,6 +17,7 @@ struct WeatherData {
         let temperature2m: Float
         let apparentTemperature: Float
         let suracePressure: Float
+        let weatherCode: Float
     }
     struct Hourly {
         let visibility: [Float]
@@ -30,5 +31,6 @@ struct WeatherData {
         let temperature2mMin: [Float]
         let rainSum: [Float]
         let uvIndexMax: [Float]
+        let weatherCode: [Float]
     }
 }

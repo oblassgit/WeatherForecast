@@ -17,11 +17,15 @@
 		072402DA2C639E5500145106 /* OpenMeteoSdk in Frameworks */ = {isa = PBXBuildFile; productRef = 072402D92C639E5500145106 /* OpenMeteoSdk */; };
 		072403162C64AF4100145106 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072403152C64AF4100145106 /* WeatherService.swift */; };
 		072403182C64E9A900145106 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072403172C64E9A900145106 /* WeatherData.swift */; };
+		07632A9B2C888DA6007685A4 /* BetterWmoCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 07632A9A2C888DA6007685A4 /* BetterWmoCodes.json */; };
+		07632A9D2C88F667007685A4 /* BetterWmoCodesNight.json in Resources */ = {isa = PBXBuildFile; fileRef = 07632A9C2C88F667007685A4 /* BetterWmoCodesNight.json */; };
 		0773B3D62C75E1AA00D3762A /* GlassyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */; };
 		0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */; };
 		0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */; };
 		0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778D1BC2C6C91FF006AE037 /* LocationManager.swift */; };
 		07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB549C2C875C7D000991D0 /* ViewModel.swift */; };
+		07FB54A12C8855E5000991D0 /* WmoCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 07FB54A02C8855E5000991D0 /* WmoCodes.json */; };
+		07FB54A32C88586A000991D0 /* WmoCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB54A22C88586A000991D0 /* WmoCodeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,12 +58,16 @@
 		072402CB2C63905400145106 /* WeatherForecastUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		072403152C64AF4100145106 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		072403172C64E9A900145106 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		07632A9A2C888DA6007685A4 /* BetterWmoCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BetterWmoCodes.json; path = ../../../Downloads/BetterWmoCodes.json; sourceTree = "<group>"; };
+		07632A9C2C88F667007685A4 /* BetterWmoCodesNight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BetterWmoCodesNight.json; sourceTree = "<group>"; };
 		0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassyCardView.swift; sourceTree = "<group>"; };
 		0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayForecastView.swift; sourceTree = "<group>"; };
 		0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMyWeatherData.swift; sourceTree = "<group>"; };
 		0778D1BC2C6C91FF006AE037 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		07E6E9262C6B795D00ECD6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07FB549C2C875C7D000991D0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		07FB54A02C8855E5000991D0 /* WmoCodes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WmoCodes.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		07FB54A22C88586A000991D0 /* WmoCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WmoCodeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +131,10 @@
 				0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */,
 				0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */,
 				07FB549C2C875C7D000991D0 /* ViewModel.swift */,
+				07FB54A02C8855E5000991D0 /* WmoCodes.json */,
+				07FB54A22C88586A000991D0 /* WmoCodeService.swift */,
+				07632A9A2C888DA6007685A4 /* BetterWmoCodes.json */,
+				07632A9C2C88F667007685A4 /* BetterWmoCodesNight.json */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -263,7 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				072402B62C63905300145106 /* Preview Assets.xcassets in Resources */,
+				07632A9D2C88F667007685A4 /* BetterWmoCodesNight.json in Resources */,
 				072402B32C63905300145106 /* Assets.xcassets in Resources */,
+				07632A9B2C888DA6007685A4 /* BetterWmoCodes.json in Resources */,
+				07FB54A12C8855E5000991D0 /* WmoCodes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +305,7 @@
 			files = (
 				072402B12C63903F00145106 /* ContentView.swift in Sources */,
 				07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */,
+				07FB54A32C88586A000991D0 /* WmoCodeService.swift in Sources */,
 				072403162C64AF4100145106 /* WeatherService.swift in Sources */,
 				0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */,
 				0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */,
