@@ -58,13 +58,11 @@
         "description":"Light Rain",
         "image":"cloud.moon.rain.fill"
     },
-
     {
         "id": "63",
         "description":"Rain",
         "image":"cloud.rain.fill"
     },
-
     {
         "id": "65",
         "description":"Heavy Rain",
@@ -105,25 +103,16 @@
         "description":"Light Showers",
         "image":"cloud.drizzle.fill"
     },
-
     {
         "id": "81",
         "description":"Showers",
         "image":"cloud.rain.fill"
     },
-
     {
         "id": "82",
         "description":"Heavy Showers",
         "image":"cloud.heavyrain.fill"
     },
-
-    {
-        "id": "85_",
-        "description":"Light Snow Showers",
-        "image":"cloud.snow.fill"
-    },
-
     {
         "id": "86",
         "description":"Snow Showers",
