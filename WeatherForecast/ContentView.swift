@@ -49,6 +49,10 @@ struct ContentView: View {
                     .padding(.trailing)
             }
             
+            WeatherChartView(temperatureArray: Array(viewModel.data?[0].hourlyTemp.prefix(24) ?? [0.0,0.0]), startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentTemp: Double(viewModel.data?[0].temp ?? 0.0))
+                .frame(height: 300)
+                .padding(.horizontal)
+            
             HStack {
                 GlassyCardView(viewDescription: "sunrise", iconName: "sunrise.fill", smallIconName: "", bigText: viewModel.data?[0].sunriseTime ?? "00:00", smallText: "", showSmall: false, unit: "")
                     .padding(.leading)
@@ -99,7 +103,7 @@ struct TodayForecastView: View {
                 Image(systemName: "location.fill")
                 Text(viewModel.placeName ?? "")
             }
-            Text(" \(Int(data?[0].temp ?? 0.0))°")
+            Text(" \(Int(data?[0].temp?.rounded() ?? 0.0))°")
                 .font(Font.system(size: 60))
                 .padding(1)
             
