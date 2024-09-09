@@ -21,11 +21,10 @@ struct ContentView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 let isDayTime = viewModel.data?[0].isDay ?? false
-                let isRainy = viewModel.data?[0].isRainy ?? false
                 
                 
                 
-                TodayForecastView(viewModel: viewModel, isDayTime: isDayTime, isRainy: isRainy)
+                TodayForecastView(viewModel: viewModel, isDayTime: isDayTime)
                 SevenDayForecastView(data: viewModel.data)
                 
             }
@@ -49,7 +48,7 @@ struct ContentView: View {
                     .padding(.trailing)
             }
             
-            WeatherChartView(temperatureArray: Array(viewModel.data?[0].hourlyTemp.prefix(24) ?? [0.0,0.0]), startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentTemp: Double(viewModel.data?[0].temp ?? 0.0))
+            WeatherChartView(temperatureArray: Array(viewModel.data?[0].hourlyTemp.prefix(25) ?? [0.0,0.0]),weatherCodeArray: viewModel.data?[0].hourlyWeatherCode ?? [0,0],isDayArray: viewModel.data?[0].isDayHourly, startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentTemp: Double(viewModel.data?[0].temp ?? 0.0))
                 .frame(height: 300)
                 .padding(.horizontal)
             
@@ -90,7 +89,7 @@ struct TodayForecastView: View {
     
     @ObservedObject var viewModel: ViewModel
     var isDayTime: Bool
-    var isRainy: Bool
+    var weatherIconService = WeatherIconService()
 
     var body: some View {
         let data = viewModel.data
@@ -107,13 +106,13 @@ struct TodayForecastView: View {
                 .font(Font.system(size: 60))
                 .padding(1)
             
-            let colorArray = decideWeathericonColorArray(weatherCode: data?[0].currentWeatherCode ?? -1, systemName: ViewModel().getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true))
-            Image(systemName: String(ViewModel().getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true)))
+            var colorArray = weatherIconService.decideWeathericonColorArray(systemName: weatherIconService.getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true))
+            Image(systemName: String(weatherIconService.getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true)))
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(colorArray[0], colorArray[1])
                 .font(Font.largeTitle)
                 .padding(1)
-            Text(viewModel.getWeatherDescription(wmoCode: String(data?[0].currentWeatherCode ?? 99), isDay: isDayTime))
+            Text(weatherIconService.getWeatherDescription(wmoCode: String(data?[0].currentWeatherCode ?? 99), isDay: isDayTime))
                 .font(.title3)
             Text("High \(Int(data?[0].maxTemp ?? 0.0))°")
             Text("Low \(Int(data?[0].minTemp ?? 0.0))°")

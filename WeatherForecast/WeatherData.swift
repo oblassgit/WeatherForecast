@@ -24,6 +24,8 @@ struct WeatherData {
     }
     struct Hourly {
         let temperature2m: [Float]
+        let weatherCode: [Int]
+        let isDay: [Float]
     }
     struct Daily {
         let time: [Date]

@@ -63,9 +63,10 @@ struct DayForecast: View {
         VStack {
             Text(day)
                 .font(Font.headline)
-            let colorArray = decideWeathericonColorArray(weatherCode: wmoCode, systemName: (ViewModel().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
+            
+            var colorArray = WeatherIconService().decideWeathericonColorArray(systemName: (WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                                                        
-            Image(systemName: String(ViewModel().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay))/*decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day)*/)
+            Image(systemName: String(WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay))/*decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day)*/)
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(colorArray[0], colorArray[1], colorArray[2])
                 .font(Font.largeTitle)
@@ -87,29 +88,7 @@ struct DayForecast: View {
         .background(.blue)
 }
 
-func decideWeathericonColorArray(weatherCode: Int, systemName: String) -> [Color] {
-    var colorArray = [Color.white, Color.white, Color.white]
-    
-    let systemNameArray = systemName.components(separatedBy: ".")
-    
- 
-    var i = 0
-    systemNameArray.forEach { systemNamePart in
-        if systemNamePart == "sun" {
-            colorArray[i] = Color.yellow
-        } else if systemNamePart == "rain" || systemNamePart == "drizzle" {
-            colorArray[i] = Color.blue
-        }
-        i += 1
-        
-    }
-    
-    if systemName == "cloud.bolt.rain.fill" {
-        colorArray = [Color.white, Color.blue, Color.white]
-    }
-    
-    return colorArray
-}
+
 
 func decideUVIndexDescription(uvIndex: Int) -> String {
     if((0...2).contains(uvIndex)) {

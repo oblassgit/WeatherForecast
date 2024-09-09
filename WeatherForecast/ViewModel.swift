@@ -31,22 +31,5 @@ class ViewModel: ObservableObject {
             let item = getItemFromJson(fileName: "BetterWmoCodes", id: "0")
         }
     }
-    
-    func getWeatherIconSystemName(wmoCode: String, isDay: Bool) -> String {
 
-        if isDay {
-            return getItemFromJson(fileName: "BetterWmoCodes", id: wmoCode)?.image ?? "exclamationmark.questionmark"
-        } else {
-            return getItemFromJson(fileName: "BetterWmoCodesNight", id: (wmoCode))?.image ?? "exclamationmark.questionmark"
-        }
-    }
-    
-    func getWeatherDescription(wmoCode: String, isDay: Bool) -> String {
-
-        if isDay {
-            return getItemFromJson(fileName: "BetterWmoCodes", id: wmoCode)?.description ?? "Probably pretty bad"
-        } else {
-            return getItemFromJson(fileName: "BetterWmoCodesNight", id: (wmoCode))?.description ?? "Probably pretty bad"
-        }
-    }
 }

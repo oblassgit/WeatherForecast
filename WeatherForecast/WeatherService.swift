@@ -30,6 +30,8 @@ struct MyWeatherData {
     var sunriseTime: String?
     var sunsetTime: String?
     var hourlyTemp: [Float]
+    var hourlyWeatherCode: [Int]
+    var isDayHourly: [Bool]
 }
 
 enum Direction: String, CaseIterable {
@@ -64,7 +66,7 @@ class WeatherService {
         
         
         /// Make sure the URL contains `&format=flatbuffers`
-        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code,visibility,wind_speed_10m,wind_direction_10m&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code,sunrise,sunset&timezone=auto&format=flatbuffers")!
+        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code,visibility,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code,sunrise,sunset&timezone=auto&format=flatbuffers")!
         
         
         var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1, visibility: 0.0, windSpeed: 0.0, windDirection: 0.0))
@@ -102,7 +104,9 @@ class WeatherService {
                     sunset: daily.variables(at: 6)!.valuesInt64
                 ),
                 hourly: .init(
-                    temperature2m: hourly.variables(at: 0)!.values
+                    temperature2m: hourly.variables(at: 0)!.values,
+                    weatherCode: hourly.variables(at: 1)!.values.compactMap {flt in Int(flt)},
+                    isDay: hourly.variables(at: 2)!.values
                 ),
                 current: .init(
                         isDay: current.variables(at: 0)!.value,
@@ -131,6 +135,7 @@ class WeatherService {
                     if let hourly = data.hourly {
                         var rainy = false
                         var isDay = false
+                        var isDayHourly: [Bool] = []
                         for (i, date) in dailies.time.enumerated() {
                             // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
 
@@ -146,7 +151,14 @@ class WeatherService {
                                 isDay = false
                             }
                             
-                            
+                            hourly.isDay.forEach { isDay in
+                                if(Float(current.isDay) != 0) {
+                                    isDayHourly.append(true)
+                                } else {
+                                    isDayHourly.append(false)
+                                }
+                                
+                            }
 
                             allData.append(MyWeatherData(
                                 dateObj: date,
@@ -168,7 +180,9 @@ class WeatherService {
                                 currentWeatherCode: Int(current.weatherCode),
                                 sunriseTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
                                 sunsetTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
-                                hourlyTemp: hourly.temperature2m
+                                hourlyTemp: hourly.temperature2m,
+                                hourlyWeatherCode: hourly.weatherCode,
+                                isDayHourly: isDayHourly
                                 
                                 
                             ))
