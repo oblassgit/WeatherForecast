@@ -12,5 +12,7 @@
 
 </div>
 
-
+##Dependencies
+https://github.com/open-meteo/sdk/tree/main/swift
+https://github.com/open-meteo/open-meteo
 
