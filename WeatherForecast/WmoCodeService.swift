@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct ResponseData: Decodable {
-    var wmoItem: [WmoItem]
-}
+
 struct WmoItem : Decodable {
     let id: String
     let description: String
     let image: String
 }
 
-var wmoItemDictionary: Dictionary<String, WmoItem>? = nil
+var wmoItemDictionaryDay: Dictionary<String, WmoItem>? = nil
+var wmoItemDictionaryNight: Dictionary<String, WmoItem>? = nil
 
-func fillDictionary(_ fileName: String) {
-    wmoItemDictionary = [:]
+
+func fillDictionaryDay() {
+    wmoItemDictionaryDay = [:]
     do {
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+        if let url = Bundle.main.url(forResource: "BetterWmoCodes", withExtension: "json") {
             
             // Load the data from the file
             let data = try Data(contentsOf: url)
@@ -31,7 +31,7 @@ func fillDictionary(_ fileName: String) {
             
             // Now you can access the parsed data
             for wmoItem in weatherData {
-                wmoItemDictionary![wmoItem.id] = wmoItem
+                wmoItemDictionaryDay![wmoItem.id] = wmoItem
             }
         }
     } catch {
@@ -39,18 +39,47 @@ func fillDictionary(_ fileName: String) {
     }
 }
 
-func getItemFromJson(fileName: String, id: String) -> WmoItem? {
-    if wmoItemDictionary == nil {
-        fillDictionary(fileName)
+func fillDictionaryNight() {
+    wmoItemDictionaryNight = [:]
+    do {
+        if let url = Bundle.main.url(forResource: "BetterWmoCodesNight", withExtension: "json") {
+            
+            // Load the data from the file
+            let data = try Data(contentsOf: url)
+            
+            // Parse the JSON data
+            let weatherData = try JSONDecoder().decode([WmoItem].self, from: data)
+            
+            // Now you can access the parsed data
+            for wmoItem in weatherData {
+                wmoItemDictionaryNight![wmoItem.id] = wmoItem
+            }
+        }
+    } catch {
+        print("Error loading or parsing the JSON: \(error)")
     }
-    
-    
-    if let wmoItemDictionary = wmoItemDictionary, let wmoItem = wmoItemDictionary[id] {
-        return wmoItem
+}
+
+func getItemFromJson(isDay:Bool, id: String) -> WmoItem? {
+    if isDay {
+        if wmoItemDictionaryDay == nil {
+            fillDictionaryDay()
+        }
+        if let wmoItemDictionary = wmoItemDictionaryDay, let wmoItem = wmoItemDictionary[id] {
+            return wmoItem
+        } else {
+            print("Could not find the file.")
+        }
     } else {
-        print("Could not find the file.")
+        if wmoItemDictionaryNight == nil {
+            fillDictionaryNight()
+        }
+        if let wmoItemDictionary = wmoItemDictionaryNight, let wmoItemNight = wmoItemDictionary[id] {
+            return wmoItemNight
+        } else {
+            print("Could not find the file.")
+        }
     }
-    
     return nil
 }
 

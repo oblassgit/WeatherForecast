@@ -50,13 +50,7 @@ struct GlassyCardView: View {
                 .opacity(0.25)
                 .shadow(radius: 10)
         }
-                
-                
-            
-            
-        }
-
-    
+    }
 }
 
 #Preview {
