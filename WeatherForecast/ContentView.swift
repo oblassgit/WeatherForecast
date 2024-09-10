@@ -113,7 +113,7 @@ struct TodayForecastView: View {
             let colorArray = weatherIconService.decideWeathericonColorArray(systemName: weatherIconService.getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true))
             Image(systemName: String(weatherIconService.getWeatherIconSystemName(wmoCode: String(data?[0].currentWeatherCode ?? -1), isDay: data?[0].isDay ?? true)))
                 .symbolRenderingMode(.palette)
-                .foregroundStyle(colorArray[0], colorArray[1])
+                .foregroundStyle(colorArray[0], colorArray[1], colorArray[2])
                 .font(Font.largeTitle)
                 .padding(1)
             Text(weatherIconService.getWeatherDescription(wmoCode: String(data?[0].currentWeatherCode ?? 99), isDay: isDayTime))
