@@ -152,7 +152,6 @@ class WeatherService {
                             }
                             
                             hourly.isDay.forEach { isDay in
-                                debugPrint(isDay)
                                 if(isDay == 1.0) {
                                     isDayHourly.append(true)
                                 } else {

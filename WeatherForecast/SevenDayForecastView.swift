@@ -73,7 +73,7 @@ struct DayForecast: View {
         VStack {
             Text(day)
                 .font(Font.headline)
-            var colorArray = WeatherIconService().decideWeathericonColorArray(systemName: (WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
+            let colorArray = WeatherIconService().decideWeathericonColorArray(systemName: (WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                                                        
             Image(systemName: String(WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                 .symbolRenderingMode(.palette)

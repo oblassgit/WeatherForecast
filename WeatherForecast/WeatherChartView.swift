@@ -19,7 +19,6 @@ struct HourlyData : Identifiable {
     
     
     init(date: Date, temperature: Double, systemName: String, colorArray: [Color]) {
-        let calendar = Calendar.autoupdatingCurrent
         self.date = date
         self.temperature = temperature
         self.systemName = systemName
@@ -165,7 +164,7 @@ struct WeatherChartView: View {
 }
 
 private func formatDateToTimeStamp(date: Date) -> String {
-    var dateFormatter = DateFormatter()
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     return dateFormatter.string(from: date)
 }
@@ -175,7 +174,7 @@ private func formatDateToTimeStamp(date: Date) -> String {
 
 
 #Preview {
-    WeatherChartView(temperatureArray: [20.1, 24.1, 23.5, 29.3, 30, 28, 28, 28, 29, 32, 33, 34, 33, 30, 30, 32, 29, 27, 26, 25, 25, 24, 23,20], weatherCodeArray: [0,1,1,1,2,1,1,1,1,3,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1], isDayArray: [true, false,false, false,false, false,true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false], startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentTemp: 25.3)
+    WeatherChartView(temperatureArray: [20.1, 24.1, 23.5, 29.3, 30, 28, 28, 28, 29, 32, 33, 34, 33, 30, 30, 32, 29, 27, 26, 25, 25, 24, 23,20, 19], weatherCodeArray: [0,1,1,1,2,1,1,1,1,3,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1], isDayArray: [true, false,false, false,false, false,true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false], startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentTemp: 25.3)
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.gray)
