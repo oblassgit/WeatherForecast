@@ -48,7 +48,7 @@ struct WeatherChartView: View {
         
     
         temperatureArray.forEach { temperature in
-            //isDay = isDayArray?[i] ?? true
+            isDay = isDayArray?[i] ?? true
             let systemName = weatherIconService.getWeatherIconSystemName(wmoCode: String(weatherCodeArray[i]), isDay: isDay ?? false)
             let colorArray = weatherIconService.decideWeathericonColorArray(systemName: systemName)
             array.append(HourlyData(date: (startDate.addingTimeInterval(TimeInterval(i * 60 * 60))), temperature: Double(temperature), systemName: systemName, colorArray: colorArray))
@@ -121,11 +121,11 @@ struct WeatherChartView: View {
                 
                 
                 AreaMark(x: .value("Time", $0.date), y: .value("Temperature", $0.temperature))
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(.cardinal)
                     .foregroundStyle(Gradient(colors: [Color.yellow.opacity(0.5), Color.green.opacity(0.3), Color.blue.opacity(0.2)]))
                 
                 LineMark(x: .value("Time", $0.date), y: .value("Temperature", $0.temperature))
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(.cardinal)
                     .lineStyle(StrokeStyle(lineWidth: 5))
                     .foregroundStyle(Gradient(colors: [Color.yellow, Color.green, Color.blue]))
                 
@@ -136,7 +136,6 @@ struct WeatherChartView: View {
                 
             }
             .chartXSelection(value: $chartSelection)
-            .chartYSelection(value: $chartYSelection)
             
             
             

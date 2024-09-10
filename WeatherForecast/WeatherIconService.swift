@@ -48,20 +48,13 @@ class WeatherIconService {
     
     func getWeatherIconSystemName(wmoCode: String, isDay: Bool) -> String {
 
-        if isDay {
-            return getItemFromJson(fileName: "BetterWmoCodes", id: wmoCode)?.image ?? "exclamationmark.questionmark"
-        } else {
-            return getItemFromJson(fileName: "BetterWmoCodesNight", id: (wmoCode))?.image ?? "exclamationmark.questionmark"
-        }
+        return getItemFromJson(isDay: isDay, id: wmoCode)?.image ?? "exclamationmark.questionmark"
+        
     }
     
     func getWeatherDescription(wmoCode: String, isDay: Bool) -> String {
-
-        if isDay {
-            return getItemFromJson(fileName: "BetterWmoCodes", id: wmoCode)?.description ?? "Probably pretty bad"
-        } else {
-            return getItemFromJson(fileName: "BetterWmoCodesNight", id: (wmoCode))?.description ?? "Probably pretty bad"
-        }
+        return getItemFromJson(isDay: isDay, id: wmoCode)?.description ?? "Probably pretty bad"
+        
     }
     
     func decideWeathericonColorArray(systemName: String) -> [Color] {

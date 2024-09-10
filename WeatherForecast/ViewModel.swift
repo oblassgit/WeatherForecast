@@ -28,7 +28,6 @@ class ViewModel: ObservableObject {
                 self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
             }
             
-            let item = getItemFromJson(fileName: "BetterWmoCodes", id: "0")
         }
     }
 

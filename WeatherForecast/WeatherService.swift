@@ -152,7 +152,8 @@ class WeatherService {
                             }
                             
                             hourly.isDay.forEach { isDay in
-                                if(Float(current.isDay) != 0) {
+                                debugPrint(isDay)
+                                if(isDay == 1.0) {
                                     isDayHourly.append(true)
                                 } else {
                                     isDayHourly.append(false)
@@ -183,12 +184,7 @@ class WeatherService {
                                 hourlyTemp: hourly.temperature2m,
                                 hourlyWeatherCode: hourly.weatherCode,
                                 isDayHourly: isDayHourly
-                                
-                                
                             ))
-                            
-                            // print(dailies.uvIndexMax[i])
-                            
                     }
                         
                     }

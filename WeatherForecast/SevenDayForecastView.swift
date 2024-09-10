@@ -55,18 +55,27 @@ struct DayForecast: View {
     let isRainy: Bool
     let high: Int
     let low: Int
-    let isDay: Bool
+    var isDay: Bool
     let wmoCode: Int
     
-    
+    init(day: String, isRainy: Bool, high: Int, low: Int, isDay: Bool, wmoCode: Int) {
+        self.day = day
+        self.isRainy = isRainy
+        self.high = high
+        self.low = low
+        self.isDay = isDay
+        if day != "Today" {
+            self.isDay = true
+        }
+        self.wmoCode = wmoCode
+    }
     var body: some View {
         VStack {
             Text(day)
                 .font(Font.headline)
-            
             var colorArray = WeatherIconService().decideWeathericonColorArray(systemName: (WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                                                        
-            Image(systemName: String(WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay))/*decideWeatherIconSystemName(isDay: isDay, isRainy: isRainy, day: day)*/)
+            Image(systemName: String(WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(colorArray[0], colorArray[1], colorArray[2])
                 .font(Font.largeTitle)
