@@ -59,6 +59,10 @@ struct ContentView: View {
                     .padding(.trailing)
             }
             
+            Link("Weather data by Open-Meteo.com", destination: URL(string: "https://open-meteo.com")!)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            
             Spacer()
             
             
