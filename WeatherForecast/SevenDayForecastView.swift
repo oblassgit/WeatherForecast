@@ -21,7 +21,7 @@ struct SevenDayForecastView: View {
             }.foregroundStyle(Color.secondary)
                 .padding(.horizontal)
                 .padding(.top)
-
+            
             Divider()
                 .padding(.horizontal)
             ScrollView(.horizontal, showsIndicators: false){
@@ -73,22 +73,23 @@ struct DayForecast: View {
         VStack {
             Text(day)
                 .font(Font.headline)
+            
             let colorArray = WeatherIconService().decideWeathericonColorArray(systemName: (WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
-                                                       
+            Spacer()
             Image(systemName: String(WeatherIconService().getWeatherIconSystemName(wmoCode: String(wmoCode), isDay: isDay)))
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(colorArray[0], colorArray[1], colorArray[2])
                 .font(Font.largeTitle)
                 .padding(5)
+            Spacer()
             Text("High: \(high)°")
             Text("Low \(low)°")
                 .foregroundStyle(Color.secondary)
         }
+        .frame(maxHeight: 200)
         .padding()
     }
-
 }
-
 
 #Preview {
     
