@@ -56,7 +56,10 @@ extension BinaryFloatingPoint {
 class WeatherService {
     
     
-    
+    var allData : [MyWeatherData] = []
+    var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1, visibility: 0.0, windSpeed: 0.0, windDirection: 0.0))
+
+
     public func callWeatherService(location: CLLocationCoordinate2D?) async -> [MyWeatherData] {
         
         
@@ -69,8 +72,6 @@ class WeatherService {
         let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code,visibility,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code,sunrise,sunset&timezone=auto&format=flatbuffers")!
         
         
-        var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1, visibility: 0.0, windSpeed: 0.0, windDirection: 0.0))
-        var allData : [MyWeatherData] = []
         
         do {
             let responses = try await WeatherApiResponse.fetch(url: url)
@@ -129,65 +130,67 @@ class WeatherService {
             hmDateFormatter.timeZone = TimeZone(abbreviation: timezoneAbbreviation ?? "gmt")
             dateFormatter.dateFormat = "EE"
             
-            
-            if let dailies = data.daily {
-                if let current = data.current {
-                    if let hourly = data.hourly {
-                        var rainy = false
-                        var isDay = false
-                        var isDayHourly: [Bool] = []
-                        for (i, date) in dailies.time.enumerated() {
-                            // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
-
-                            if(Float(dailies.rainSum[i]) > Float(8.0)) {
-                                rainy = true
-                            } else {
-                                rainy = false
-                            }
-                            
-                            if(Float(current.isDay) != 0) {
-                                isDay = true
-                            } else {
-                                isDay = false
-                            }
-                            
-                            hourly.isDay.forEach { isDay in
-                                if(isDay == 1.0) {
-                                    isDayHourly.append(true)
+            if data.current?.windDirection != nil {
+                if let dailies = data.daily {
+                    if let current = data.current {
+                        if let hourly = data.hourly {
+                            var rainy = false
+                            var isDay = false
+                            var isDayHourly: [Bool] = []
+                            for (i, date) in dailies.time.enumerated() {
+                                // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
+                                
+                                if(Float(dailies.rainSum[i]) > Float(8.0)) {
+                                    rainy = true
                                 } else {
-                                    isDayHourly.append(false)
+                                    rainy = false
                                 }
                                 
+                                if(Float(current.isDay) != 0) {
+                                    isDay = true
+                                } else {
+                                    isDay = false
+                                }
+                                
+                                hourly.isDay.forEach { isDay in
+                                    if(isDay == 1.0) {
+                                        isDayHourly.append(true)
+                                    } else {
+                                        isDayHourly.append(false)
+                                    }
+                                    
+                                }
+                                
+                                allData.append(MyWeatherData(
+                                    dateObj: date,
+                                    date: dateFormatter.string(from: date),
+                                    minTemp: dailies.temperature2mMin[i],
+                                    maxTemp: dailies.temperature2mMax[i],
+                                    isRainy: rainy,
+                                    maxUVIndex: Double(dailies.uvIndexMax[i]),
+                                    isDay: isDay,
+                                    temp: current.temperature2m,
+                                    visibility: current.visibility,
+                                    windSpeed: current.windSpeed,
+                                    windDirection: String(describing: Direction(current.windDirection)),
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    apparentTemperature: current.apparentTemperature,
+                                    surfacePressure: current.suracePressure,
+                                    dailyWeatherCode: Int(dailies.weatherCode[i]),
+                                    currentWeatherCode: Int(current.weatherCode),
+                                    sunriseTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
+                                    sunsetTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
+                                    hourlyTemp: hourly.temperature2m,
+                                    hourlyWeatherCode: hourly.weatherCode,
+                                    isDayHourly: isDayHourly
+                                ))
                             }
-
-                            allData.append(MyWeatherData(
-                                dateObj: date,
-                                date: dateFormatter.string(from: date),
-                                minTemp: dailies.temperature2mMin[i],
-                                maxTemp: dailies.temperature2mMax[i],
-                                isRainy: rainy,
-                                maxUVIndex: Double(dailies.uvIndexMax[i]),
-                                isDay: isDay,
-                                temp: current.temperature2m,
-                                visibility: current.visibility,
-                                windSpeed: current.windSpeed,
-                                windDirection: String(describing: Direction(current.windDirection)),
-                                latitude: latitude,
-                                longitude: longitude,
-                                apparentTemperature: current.apparentTemperature,
-                                surfacePressure: current.suracePressure,
-                                dailyWeatherCode: Int(dailies.weatherCode[i]),
-                                currentWeatherCode: Int(current.weatherCode),
-                                sunriseTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
-                                sunsetTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
-                                hourlyTemp: hourly.temperature2m,
-                                hourlyWeatherCode: hourly.weatherCode,
-                                isDayHourly: isDayHourly
-                            ))
-                    }
-                        
+                            
+                        }
                     }
                 }
+                
             }
         } catch {
             print(error.localizedDescription)

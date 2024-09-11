@@ -14,8 +14,8 @@
             filePath = "WeatherForecast/WeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "callWeatherService(location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,24 +30,8 @@
             filePath = "WeatherForecast/WeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "callWeatherService(location:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1A4F33C3-DEAD-45E7-84AD-01FC256517C2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherForecast/WeatherService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "callWeatherService(location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +46,8 @@
             filePath = "WeatherForecast/WeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "callWeatherService(location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -183,17 +167,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC0AA6AD-5A94-42D1-A6D1-586DF20BA337"
+            uuid = "9F1F2FDB-9CDD-477F-AB66-AB5C5B24FD96"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WeatherForecast/WeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "callWeatherService(location:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9F1F2FDB-9CDD-477F-AB66-AB5C5B24FD96 - ceb6f2638da2565f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherForecast.WeatherService.callWeatherService(location: Swift.Optional&lt;__C.CLLocationCoordinate2D&gt;) async -&gt; Swift.Array&lt;WeatherForecast.MyWeatherData&gt;"
+                  moduleName = "WeatherForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oblass/XcodeProjects/WeatherForecast/WeatherForecast/WeatherService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133">
+               </Location>
+               <Location
+                  uuid = "9F1F2FDB-9CDD-477F-AB66-AB5C5B24FD96 - ceb6f2638da2565f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherForecast.WeatherService.callWeatherService(location: Swift.Optional&lt;__C.CLLocationCoordinate2D&gt;) async -&gt; Swift.Array&lt;WeatherForecast.MyWeatherData&gt;"
+                  moduleName = "WeatherForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oblass/XcodeProjects/WeatherForecast/WeatherForecast/WeatherService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
