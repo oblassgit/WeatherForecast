@@ -19,15 +19,15 @@ class ViewModel: ObservableObject {
     func refreshData() {
         Task.init {
             locationManager.checkLocationAuthorization()
-            data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
-            if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.notDetermined) {
+            if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
                 data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
+                locationManager.lookUpCurrentLocation { place in
+                        self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+                }
+            } else {
+                data  = await WeatherService().callWeatherService(location: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
+                self.placeName = ("Cupertino, CA")
             }
-            
-            locationManager.lookUpCurrentLocation { place in
-                self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
-            }
-            
         }
     }
 

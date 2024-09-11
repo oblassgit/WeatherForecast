@@ -178,36 +178,6 @@
             endingLineNumber = "133"
             landmarkName = "callWeatherService(location:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9F1F2FDB-9CDD-477F-AB66-AB5C5B24FD96 - ceb6f2638da2565f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for WeatherForecast.WeatherService.callWeatherService(location: Swift.Optional&lt;__C.CLLocationCoordinate2D&gt;) async -&gt; Swift.Array&lt;WeatherForecast.MyWeatherData&gt;"
-                  moduleName = "WeatherForecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oblass/XcodeProjects/WeatherForecast/WeatherForecast/WeatherService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133">
-               </Location>
-               <Location
-                  uuid = "9F1F2FDB-9CDD-477F-AB66-AB5C5B24FD96 - ceb6f2638da2565f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for WeatherForecast.WeatherService.callWeatherService(location: Swift.Optional&lt;__C.CLLocationCoordinate2D&gt;) async -&gt; Swift.Array&lt;WeatherForecast.MyWeatherData&gt;"
-                  moduleName = "WeatherForecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oblass/XcodeProjects/WeatherForecast/WeatherForecast/WeatherService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
