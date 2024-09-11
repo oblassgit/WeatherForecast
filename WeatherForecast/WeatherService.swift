@@ -60,8 +60,6 @@ class WeatherService {
 
 
     public func callWeatherService(location: CLLocationCoordinate2D?) async -> [MyWeatherData] {
-        
-        debugPrint(allData.count)
 
         
         let latitude = location?.latitude ?? 0.0
@@ -138,7 +136,6 @@ class WeatherService {
                         var isDay = false
                         var isDayHourly: [Bool] = []
                         
-                        debugPrint("appending Data!")
                         for (i, date) in dailies.time.enumerated() {
                             // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
                             
@@ -197,7 +194,6 @@ class WeatherService {
         } catch {
             print(error.localizedDescription)
         }
-        debugPrint(allData.count)
         
         return allData
         

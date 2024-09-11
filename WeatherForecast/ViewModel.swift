@@ -29,7 +29,7 @@ class ViewModel: ObservableObject {
             self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
             self.placeName = "Cupertino, CA"
         }
-        debugPrint(self.placeName ?? "No placename found")
+        debugPrint("placeName: " + (self.placeName ?? "No placename found"))
         
     }
     

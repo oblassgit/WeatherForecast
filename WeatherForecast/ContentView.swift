@@ -72,12 +72,12 @@ struct ContentView: View {
             viewModel.refreshData()
         }).onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
-                debugPrint("Active")
+                debugPrint("scenePhase: Active")
                 viewModel.refreshData()
             } else if newPhase == .inactive {
-                debugPrint("Inactive")
+                debugPrint("scenePhase: Inactive")
             } else if newPhase == .background {
-                debugPrint("Background")
+                debugPrint("scenePhase: Background")
             }
         }
     }
