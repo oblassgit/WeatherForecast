@@ -13,7 +13,6 @@ class ViewModel: ObservableObject {
     @Published var placeName: String?
     
     private var locationManager = LocationManager()
-
     
     
     func refreshData() {
@@ -21,12 +20,14 @@ class ViewModel: ObservableObject {
             locationManager.lookUpCurrentLocation { place in
                 if place != nil {
                     self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+                } else {
+                    self.placeName = "Cupertino, CA"
                 }
                 self.fetchData(place: place?.location?.coordinate)
             }
         } else {
             self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
-            self.placeName = ("Cupertino, CA")
+            self.placeName = "Cupertino, CA"
         }
         debugPrint(self.placeName ?? "No placename found")
         
@@ -41,5 +42,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
+    
+    
 }

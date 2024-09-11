@@ -9,8 +9,6 @@ import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
-    var location: CLLocation?
-    
     @ObservedObject var viewModel: ViewModel
     
     @Environment(\.scenePhase) var scenePhase
