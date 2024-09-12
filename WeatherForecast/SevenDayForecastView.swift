@@ -28,9 +28,11 @@ struct SevenDayForecastView: View {
                 
                 HStack{
                     if let data = data {
-                        ForEach(0 ..< data.count) { value in
-                            let day = data[value]
-                            DayForecast(day: value == 0 ? "Today" : day.date ?? "??", isRainy: day.isRainy ?? false, high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
+                        if !data.isEmpty {
+                            ForEach(0 ..< data.count) { value in
+                                let day = data[value]
+                                DayForecast(day: value == 0 ? "Today" : day.date ?? "??", isRainy: day.isRainy ?? false, high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
+                            }
                         }
                     }
                 }

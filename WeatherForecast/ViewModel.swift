@@ -13,22 +13,39 @@ class ViewModel: ObservableObject {
     @Published var placeName: String?
     
     private var locationManager = LocationManager()
-
     
     
     func refreshData() {
+        locationManager.checkLocationAuthorization()
+
+        if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
+            locationManager.lookUpCurrentLocation { place in
+                if place != nil {
+                    self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+                }
+                if place == nil && self.placeName == nil {
+                    self.placeName = "Cupertino, CA"
+                }
+                self.fetchData(place: place?.location?.coordinate)
+            }
+        } else {
+            self.placeName = "Cupertino, CA"
+            self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
+        }
+        debugPrint("placeName: " + (self.placeName ?? "No placename found"))
+        
+    }
+    
+    func fetchData(place: CLLocationCoordinate2D?) {
         Task.init {
             locationManager.checkLocationAuthorization()
-            data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
-            if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.notDetermined) {
-                data  = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
+            let data = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
+            if !data.isEmpty {
+                self.data = data
             }
-            
-            locationManager.lookUpCurrentLocation { place in
-                self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
-            }
-            
         }
     }
-
+    
+    
+    
 }

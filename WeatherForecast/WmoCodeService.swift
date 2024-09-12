@@ -35,7 +35,7 @@ func fillDictionaryDay() {
             }
         }
     } catch {
-        print("Error loading or parsing the JSON: \(error)")
+        debugPrint("Error loading or parsing the JSON: \(error)")
     }
 }
 
@@ -56,7 +56,7 @@ func fillDictionaryNight() {
             }
         }
     } catch {
-        print("Error loading or parsing the JSON: \(error)")
+        debugPrint("Error loading or parsing the JSON: \(error)")
     }
 }
 
@@ -68,7 +68,7 @@ func getItemFromJson(isDay:Bool, id: String) -> WmoItem? {
         if let wmoItemDictionary = wmoItemDictionaryDay, let wmoItem = wmoItemDictionary[id] {
             return wmoItem
         } else {
-            print("Could not find the file.")
+            debugPrint("Could not find the WMO-Code: \(id)")
         }
     } else {
         if wmoItemDictionaryNight == nil {
@@ -77,7 +77,7 @@ func getItemFromJson(isDay:Bool, id: String) -> WmoItem? {
         if let wmoItemDictionary = wmoItemDictionaryNight, let wmoItemNight = wmoItemDictionary[id] {
             return wmoItemNight
         } else {
-            print("Could not find the file.")
+            debugPrint("Could not find the WMO-Code: \(id)")
         }
     }
     return nil
