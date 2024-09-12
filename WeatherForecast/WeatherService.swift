@@ -122,14 +122,6 @@ class WeatherService {
                     )
             )
                         
-            /// Timezone `.gmt` is deliberately used.
-            /// By adding `utcOffsetSeconds` before, local-time is inferred
-            let dateFormatter = DateFormatter()
-            let hmDateFormatter = DateFormatter()
-            
-            hmDateFormatter.dateFormat = "HH:mm"
-            hmDateFormatter.timeZone = TimeZone(abbreviation: timezoneAbbreviation ?? "gmt")
-            dateFormatter.dateFormat = "EE"
             
             if let dailies = data.daily {
                 if let current = data.current {
@@ -162,11 +154,9 @@ class WeatherService {
                                 
                             }
                             
-                            debugPrint("current UV Index: \(current.uvIndex)")
-                            
                             allData.append(MyWeatherData(
-                                dateObj: date,
-                                date: dateFormatter.string(from: date),
+                                dateObj: .now,
+                                date: DateFormatterService().dayAbbrDateFormatter.string(from: date),
                                 minTemp: dailies.temperature2mMin[i],
                                 maxTemp: dailies.temperature2mMax[i],
                                 isRainy: rainy,
@@ -182,8 +172,8 @@ class WeatherService {
                                 surfacePressure: current.suracePressure,
                                 dailyWeatherCode: Int(dailies.weatherCode[i]),
                                 currentWeatherCode: Int(current.weatherCode),
-                                sunriseTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
-                                sunsetTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
+                                sunriseTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
+                                sunsetTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
                                 hourlyTemp: hourly.temperature2m,
                                 hourlyWeatherCode: hourly.weatherCode,
                                 isDayHourly: isDayHourly,

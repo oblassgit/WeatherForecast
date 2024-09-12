@@ -12,9 +12,9 @@ struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     
     @Environment(\.scenePhase) var scenePhase
-
     
     var body: some View {
+        
                 
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
@@ -55,6 +55,9 @@ struct ContentView: View {
                     .padding(.leading)
                 GlassyCardView(viewDescription: "sunset", iconName: "sunset.fill", smallIconName: "", bigText: viewModel.data?.first?.sunsetTime ?? "00:00", smallText: "", showSmall: false, unit: "")
                     .padding(.trailing)
+            }
+            if viewModel.data != nil {
+                Text("Last updated at \(DateFormatterService().hhmmDateFormatter.string(from: viewModel.data?.first?.dateObj ?? .distantPast))")
             }
             
             Link("Weather data by Open-Meteo.com", destination: URL(string: "https://open-meteo.com")!)
@@ -142,7 +145,7 @@ struct UvIndexView: View {
             HStack {
                 Image(systemName: "sun.max.fill")
                     .font(.subheadline)
-                Text("uv index")
+                Text("uv rindex")
                     .font(.subheadline.smallCaps())
                 Spacer()
             }
