@@ -39,7 +39,7 @@ struct ContentView: View {
             
 
             HStack {
-                GlassyCardView(viewDescription: "apparent", iconName: "thermometer.sun", smallIconName: "", bigText: "\(Int(viewModel.data?.first?.apparentTemperature ?? 0)) °", smallText: "", showSmall: false, unit: "")
+                GlassyCardView(viewDescription: "apparent", iconName: "thermometer.sun", smallIconName: "", bigText: "\(Int(viewModel.data?.first?.apparentTemperature.rounded() ?? 0)) °", smallText: "", showSmall: false, unit: "")
                     .padding(.leading)
                 
                 GlassyCardView(viewDescription: "pressure", iconName: "gauge.with.dots.needle.bottom.50percent", smallIconName: "", bigText: " \(Int(viewModel.data?.first?.surfacePressure ?? 0).formatted())", smallText: "", showSmall: false, unit: "hPa")
@@ -116,8 +116,8 @@ struct TodayForecastView: View {
                 .padding(1)
             Text(weatherIconService.getWeatherDescription(wmoCode: String(data?.first?.currentWeatherCode ?? 99), isDay: isDayTime))
                 .font(.title3)
-            Text("High \(Int(data?.first?.maxTemp ?? 0.0))°")
-            Text("Low \(Int(data?.first?.minTemp ?? 0.0))°")
+            Text("High \(Int(data?.first?.maxTemp?.rounded() ?? 0.0))°")
+            Text("Low \(Int(data?.first?.minTemp?.rounded() ?? 0.0))°")
                 .foregroundStyle(Color.secondary)
                 .padding(.bottom)
             

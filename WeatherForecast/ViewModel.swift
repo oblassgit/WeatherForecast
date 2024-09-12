@@ -16,18 +16,21 @@ class ViewModel: ObservableObject {
     
     
     func refreshData() {
+        locationManager.checkLocationAuthorization()
+
         if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
             locationManager.lookUpCurrentLocation { place in
                 if place != nil {
                     self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
-                } else {
+                }
+                if place == nil && self.placeName == nil {
                     self.placeName = "Cupertino, CA"
                 }
                 self.fetchData(place: place?.location?.coordinate)
             }
         } else {
-            self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
             self.placeName = "Cupertino, CA"
+            self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: 122.0322))
         }
         debugPrint("placeName: " + (self.placeName ?? "No placename found"))
         
@@ -37,7 +40,7 @@ class ViewModel: ObservableObject {
         Task.init {
             locationManager.checkLocationAuthorization()
             let data = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
-            if !data.isEmpty && self.data?.isEmpty ?? true {
+            if !data.isEmpty {
                 self.data = data
             }
         }
