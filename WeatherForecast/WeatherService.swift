@@ -32,6 +32,7 @@ struct MyWeatherData {
     var hourlyTemp: [Float]
     var hourlyWeatherCode: [Int]
     var isDayHourly: [Bool]
+    var uvIndex: Float?
 }
 
 enum Direction: String, CaseIterable {
@@ -56,7 +57,7 @@ extension BinaryFloatingPoint {
 class WeatherService {
     
     private var allData : [MyWeatherData] = []
-    private var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1, visibility: 0.0, windSpeed: 0.0, windDirection: 0.0))
+    private var data = WeatherData(daily: nil, hourly: nil, current: .init(isDay: 0, temperature2m: 0.0, apparentTemperature: 0.0, suracePressure: 0.0, weatherCode: -1, visibility: 0.0, windSpeed: 0.0, windDirection: 0.0, uvIndex: 0.0))
 
 
     public func callWeatherService(location: CLLocationCoordinate2D?) async -> [MyWeatherData] {
@@ -68,7 +69,7 @@ class WeatherService {
         
         
         /// Make sure the URL contains `&format=flatbuffers`
-        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code,visibility,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code,sunrise,sunset&timezone=auto&format=flatbuffers")!
+        let url = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)&current=is_day,temperature_2m,apparent_temperature,surface_pressure,weather_code,visibility,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,weather_code,sunrise,sunset&timezone=auto&format=flatbuffers")!
         
         
         
@@ -116,7 +117,8 @@ class WeatherService {
                         weatherCode: current.variables(at: 4)!.value,
                         visibility: current.variables(at: 5)!.value,
                         windSpeed: current.variables(at: 6)!.value,
-                        windDirection: current.variables(at: 7)!.value
+                        windDirection: current.variables(at: 7)!.value,
+                        uvIndex: current.variables(at: 8)!.value
                     )
             )
                         
@@ -160,6 +162,8 @@ class WeatherService {
                                 
                             }
                             
+                            debugPrint("current UV Index: \(current.uvIndex)")
+                            
                             allData.append(MyWeatherData(
                                 dateObj: date,
                                 date: dateFormatter.string(from: date),
@@ -182,7 +186,8 @@ class WeatherService {
                                 sunsetTime: hmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
                                 hourlyTemp: hourly.temperature2m,
                                 hourlyWeatherCode: hourly.weatherCode,
-                                isDayHourly: isDayHourly
+                                isDayHourly: isDayHourly,
+                                uvIndex: current.uvIndex
                             ))
                         }
                         

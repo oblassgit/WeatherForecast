@@ -128,55 +128,73 @@ struct TodayForecastView: View {
 struct UvIndexView: View {
     var data: [MyWeatherData]?
     
+    
     var body: some View {
+        
+        let maxUvIndex = data?.first?.maxUVIndex ?? 0.0
+        let uvIndex = data?.first?.uvIndex ?? 0.0
         VStack {
-            let maxUvIndex = data?.first?.maxUVIndex ?? 0.0
+            
+            
+            
+            
             
             HStack {
                 Image(systemName: "sun.max.fill")
                     .font(.subheadline)
-                Text("max-uv-index")
+                Text("uv index")
                     .font(.subheadline.smallCaps())
                 Spacer()
-            }.foregroundStyle(Color.secondary)
-                .padding(.horizontal)
-                .padding(.top)
-
-            Divider()
-                .padding(.horizontal)
+            }
+            .foregroundStyle(Color.secondary)
+            .padding(.top)
+            .padding(.horizontal)
             
-            VStack {
+            Divider()
+            
+            Group {
                 HStack {
-                    Text(String(Int(maxUvIndex.rounded())))
+                    Text(String(Int(uvIndex.rounded())))
                     Spacer()
                 }
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 HStack {
-                    Text(decideUVIndexDescription(uvIndex: Int(maxUvIndex.rounded())))
+                    Text(decideUVIndexDescription(uvIndex: Int(uvIndex.rounded())))
                         .font(.title2)
                     Spacer()
                 }
-            }
-            .padding(.leading)
+            }.padding(.horizontal)
             
-            Gauge(value: maxUvIndex, in: 0...12) {
+            
+            
+            Gauge(value: uvIndex, in: 0...12) {
             } currentValueLabel: {
-                Text(String(maxUvIndex))
+                Text(String(uvIndex))
             } minimumValueLabel: {
                 Text("0")
             } maximumValueLabel: {Text("12")}
                 .gaugeStyle(AccessoryLinearGaugeStyle())
                 .tint(Gradient(colors: [.green, .yellow, .red, .purple]))
                 .padding(.horizontal)
-                .padding(.bottom)
+            
+            
+            HStack {
+                Text("The UV Index will reach \(Int(maxUvIndex.rounded())) today.")
+                Spacer()
+            }
+            .padding(.horizontal)
+            .padding(.bottom)
+            
+            
+            
             
         }
         .background {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.white)
-                    .opacity(0.25)
-                    .shadow(radius: 10)
-            }
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.white)
+                .opacity(0.25)
+                .shadow(radius: 10)
+        }
         .padding(.horizontal)
     }
 }

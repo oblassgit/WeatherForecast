@@ -39,7 +39,7 @@ class ViewModel: ObservableObject {
     func fetchData(place: CLLocationCoordinate2D?) {
         Task.init {
             locationManager.checkLocationAuthorization()
-            let data = await WeatherService().callWeatherService(location: locationManager.lastKnownLocation?.coordinate)
+            let data = await WeatherService().callWeatherService(location: place)
             if !data.isEmpty {
                 self.data = data
             }
