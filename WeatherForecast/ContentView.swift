@@ -145,7 +145,7 @@ struct UvIndexView: View {
             HStack {
                 Image(systemName: "sun.max.fill")
                     .font(.subheadline)
-                Text("uv rindex")
+                Text("uv index")
                     .font(.subheadline.smallCaps())
                 Spacer()
             }

@@ -91,9 +91,9 @@ struct WeatherChartView: View {
                             HStack {
                                 VStack {
                                     
-                                    Text("\(Int(getTemp(for: chartSelection).rounded())) °C").padding(.horizontal)
+                                    Text("\(Int(getTemp(for: chartSelection).rounded())) °C").padding(.horizontal).fixedSize()
                                     
-                                    Text("\(formatDateToTimeStamp(date: chartSelection))").padding(.horizontal)
+                                    Text("\(formatDateToTimeStamp(date: chartSelection))").padding(.horizontal).fixedSize()
                                     
                                     
                                     
