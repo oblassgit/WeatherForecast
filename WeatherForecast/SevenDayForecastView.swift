@@ -15,7 +15,7 @@ struct SevenDayForecastView: View {
             HStack {
                 Image(systemName: "calendar")
                     .font(.subheadline)
-                Text("7-day-forecast")
+                Text("7-day forecast")
                     .font(.subheadline.smallCaps())
                 Spacer()
             }.foregroundStyle(Color.secondary)

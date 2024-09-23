@@ -91,9 +91,9 @@ struct WeatherChartView: View {
                             HStack {
                                 VStack {
                                     
-                                    Text("\(Int(getTemp(for: chartSelection).rounded())) °C").padding(.horizontal)
+                                    Text("\(Int(getTemp(for: chartSelection).rounded())) °C").padding(.horizontal).fixedSize()
                                     
-                                    Text("\(formatDateToTimeStamp(date: chartSelection))").padding(.horizontal)
+                                    Text("\(formatDateToTimeStamp(date: chartSelection))").padding(.horizontal).fixedSize()
                                     
                                     
                                     
@@ -164,9 +164,7 @@ struct WeatherChartView: View {
 }
 
 private func formatDateToTimeStamp(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
-    return dateFormatter.string(from: date)
+    return DateFormatterService().hhmmDateFormatter.string(from: date)
 }
 
 

@@ -21,6 +21,7 @@ struct WeatherData {
         let visibility: Float
         let windSpeed: Float
         let windDirection: Float
+        let uvIndex: Float
     }
     struct Hourly {
         let temperature2m: [Float]
