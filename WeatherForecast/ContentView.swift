@@ -13,11 +13,28 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) var scenePhase
     
+    @State var shouldPresentLocationSheet = false
+    
     var body: some View {
         
                 
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
+                HStack {
+                    Image(systemName: "location.fill")
+                    Text(viewModel.placeName ?? "")
+                }.onTapGesture {
+                    shouldPresentLocationSheet.toggle()
+                }.sheet(isPresented: $shouldPresentLocationSheet, onDismiss: {
+                    
+                }, content: {
+                    LocationView(locationSearchService: LocationSearchService(), callback: { result in
+                        debugPrint(result)
+                        viewModel.setLocation(newLocation: CLLocationCoordinate2D(latitude: result.latitude, longitude: result.longitude), placeName: result.city)
+                        shouldPresentLocationSheet.toggle()
+                    })
+                })
+                
                 let isDay = viewModel.data?.first?.isDay ?? false
 
                 
@@ -102,11 +119,6 @@ struct TodayForecastView: View {
         
         VStack {
             
-            
-            HStack {
-                Image(systemName: "location.fill")
-                Text(viewModel.placeName ?? "")
-            }
             Text(" \(Int(data?.first?.temp?.rounded() ?? 0.0))°")
                 .font(Font.system(size: 60))
                 .padding(1)

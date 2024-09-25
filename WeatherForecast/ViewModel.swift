@@ -11,6 +11,8 @@ import CoreLocation
 class ViewModel: ObservableObject {
     @Published var data: [MyWeatherData]?
     @Published var placeName: String?
+    var shouldUseLocationManager: Bool = true
+    private var location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.3230, longitude: -122.0322)
     
     private var locationManager = LocationManager()
     
@@ -18,31 +20,45 @@ class ViewModel: ObservableObject {
     func refreshData() {
         locationManager.checkLocationAuthorization()
 
-        if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
-            locationManager.lookUpCurrentLocation { place in
-                if place != nil {
-                    self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+        if shouldUseLocationManager {
+            if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
+                locationManager.lookUpCurrentLocation { place in
+                    if place != nil {
+                        self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+                    }
+                    if place == nil && self.placeName == nil {
+                        self.placeName = "Cupertino, CA"
+                    }
+                    self.fetchData(place: place?.location?.coordinate)
                 }
-                if place == nil && self.placeName == nil {
-                    self.placeName = "Cupertino, CA"
-                }
-                self.fetchData(place: place?.location?.coordinate)
+            } else {
+                self.placeName = "Cupertino, CA"
+                self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: -122.0322))
             }
-        } else {
-            self.placeName = "Cupertino, CA"
-            self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: -122.0322))
+            debugPrint("placeName: " + (self.placeName ?? "No placename found"))
         }
-        debugPrint("placeName: " + (self.placeName ?? "No placename found"))
+        
         
     }
     
     func fetchData(place: CLLocationCoordinate2D?) {
         Task.init {
-            locationManager.checkLocationAuthorization()
             let data = await WeatherService().callWeatherService(location: place)
             if !data.isEmpty {
                 self.data = data
             }
+        }
+    }
+    
+    func setLocation(newLocation: CLLocationCoordinate2D?, placeName: String) {
+        if let newLocation = newLocation {
+            shouldUseLocationManager = false
+            location = newLocation
+            fetchData(place: location)
+            self.placeName = placeName
+        } else {
+            shouldUseLocationManager = true
+            refreshData()
         }
     }
     
