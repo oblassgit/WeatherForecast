@@ -14,7 +14,6 @@ struct MyWeatherData {
     var date: String?
     var minTemp: Float?
     var maxTemp: Float?
-    var isRainy: Bool?
     var maxUVIndex: Double?
     var isDay: Bool?
     var temp: Float?
@@ -126,18 +125,25 @@ class WeatherService {
             if let dailies = data.daily {
                 if let current = data.current {
                     if let hourly = data.hourly {
-                        var rainy = false
                         var isDay = false
                         var isDayHourly: [Bool] = []
                         
-                        for (i, date) in dailies.time.enumerated() {
-                            // print("\(dateFormatter.string(from: date)) \(dailies.rainSum[i])")
+                        debugPrint(response.timezoneAbbreviation)
+                        
+                        var localToSystemTimeOffset: Int {
+                            /*var offset = 0
+                            let offsetFromGMTToSystem = TimeZone.current.secondsFromGMT()
+                            if offsetFromGMTToSystem != utcOffsetSeconds {
+                                
+                                offset = -offsetFromGMTToSystem + Int(utcOffsetSeconds)
+                                
+                            }*/
                             
-                            if(Float(dailies.rainSum[i]) > Float(8.0)) {
-                                rainy = true
-                            } else {
-                                rainy = false
-                            }
+                            return Int(utcOffsetSeconds) - TimeZone.current.secondsFromGMT()
+                            
+                        }
+                        
+                        for (i, date) in dailies.time.enumerated() {
                             
                             if(Float(current.isDay) != 0) {
                                 isDay = true
@@ -159,7 +165,6 @@ class WeatherService {
                                 date: DateFormatterService().dayAbbrDateFormatter.string(from: date),
                                 minTemp: dailies.temperature2mMin[i],
                                 maxTemp: dailies.temperature2mMax[i],
-                                isRainy: rainy,
                                 maxUVIndex: Double(dailies.uvIndexMax[i]),
                                 isDay: isDay,
                                 temp: current.temperature2m,
@@ -172,8 +177,8 @@ class WeatherService {
                                 surfacePressure: current.suracePressure,
                                 dailyWeatherCode: Int(dailies.weatherCode[i]),
                                 currentWeatherCode: Int(current.weatherCode),
-                                sunriseTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i]))),
-                                sunsetTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]))),
+                                sunriseTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunrise[i] + Int64(localToSystemTimeOffset)))),
+                                sunsetTime: DateFormatterService().hhmmDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(integerLiteral: dailies.sunset[i]  + Int64(localToSystemTimeOffset)))),
                                 hourlyTemp: hourly.temperature2m,
                                 hourlyWeatherCode: hourly.weatherCode,
                                 isDayHourly: isDayHourly,

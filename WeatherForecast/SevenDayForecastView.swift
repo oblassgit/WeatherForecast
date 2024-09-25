@@ -31,7 +31,7 @@ struct SevenDayForecastView: View {
                         if !data.isEmpty {
                             ForEach(0 ..< data.count) { value in
                                 let day = data[value]
-                                DayForecast(day: value == 0 ? "Today" : day.date ?? "??", isRainy: day.isRainy ?? false, high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
+                                DayForecast(day: value == 0 ? "Today" : day.date ?? "??", high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
                             }
                         }
                     }
@@ -54,15 +54,13 @@ struct SevenDayForecastView: View {
 
 struct DayForecast: View {
     let day: String
-    let isRainy: Bool
     let high: Int
     let low: Int
     var isDay: Bool
     let wmoCode: Int
     
-    init(day: String, isRainy: Bool, high: Int, low: Int, isDay: Bool, wmoCode: Int) {
+    init(day: String, high: Int, low: Int, isDay: Bool, wmoCode: Int) {
         self.day = day
-        self.isRainy = isRainy
         self.high = high
         self.low = low
         self.isDay = isDay
