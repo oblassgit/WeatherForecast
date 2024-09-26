@@ -21,7 +21,7 @@ struct ContentView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 HStack {
-                    Image(systemName: "location.fill")
+                    Image(systemName: "location.fill").foregroundStyle(viewModel.shouldUseLocationManager ? .blue : .primary)
                     Text(viewModel.placeName ?? "").multilineTextAlignment(.center)
                 }.onTapGesture {
                     shouldPresentLocationSheet.toggle()
@@ -31,6 +31,7 @@ struct ContentView: View {
                     LocationView(locationSearchService: LocationSearchService(), callback: { result in
                         if let result = result {
                             viewModel.setLocation(newLocation: CLLocationCoordinate2D(latitude: result.latitude, longitude: result.longitude), placeName: result.city)
+                            viewModel.refreshData()
                         } else {
                             viewModel.shouldUseLocationManager = true
                             viewModel.refreshData()
@@ -93,7 +94,6 @@ struct ContentView: View {
         .background(Gradient(colors: [.backgroundColor1, .backgroundColor3, .backgroundColor2]).opacity(0.8))
         
         .onAppear(perform: {
-            viewModel.refreshData()
         }).onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
                 debugPrint("scenePhase: Active")

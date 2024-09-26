@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import MapKit
+import SwiftData
 
 
 extension Array {
@@ -118,7 +119,7 @@ class LocationSearchService: NSObject, ObservableObject {
         
         dispatchGroup.notify(queue: .main) {
             let tmpResults = self.tmpSearchResults.filter { $0.city.lowercased().contains(self.queryFragment.lowercased()) == true}            
-            completion(tmpResults.unique{$0.city})
+            completion(tmpResults.unique{$0.city + $0.country})
         }
         
     }
@@ -151,9 +152,18 @@ extension LocationSearchService: MKLocalSearchCompleterDelegate {
     }
 }
 
-struct CityResult: Hashable {
+@Model
+final class CityResult: Hashable {
         var city: String
         var country: String
         var latitude: Double
         var longitude: Double
+    
+    
+    init(city: String, country: String, latitude: Double, longitude: Double) {
+        self.city = city
+        self.country = country
+        self.latitude = latitude
+        self.longitude = longitude
     }
+}

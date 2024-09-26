@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct LocationView: View {
     
+    @Environment(\.modelContext) private var modelContext
+    
     @ObservedObject var locationSearchService: LocationSearchService
+    
+    @Query(sort: \CityResult.city) private var recentLocations: [CityResult]
+
     
     var callback: (CityResult?) -> Void
     
     @State private var searchText = ""
-    
+        
     var body: some View {
         VStack {
             NavigationSplitView {
@@ -26,12 +32,27 @@ struct LocationView: View {
                         Text("Current Location")
                     }
                 })
+                if locationSearchService.searchResults.isEmpty {
+                    List {
+                        ForEach(recentLocations, id: \.self) { location in
+                            Button(action: {
+                                self.callback(location)
+                                
+                            }, label: { Text("\(location.city), \(location.country)")
+                            })
+                        }.onDelete(perform: { indexSet in
+                            deleteLocation(offsets: indexSet)
+                        })
+                    }
+                }
                 
                 List {
                     ForEach(locationSearchService.searchResults, id: \.self) { completionResult in
-                        //Text(completionResult.city)
                         Button(action: {
                             self.callback(completionResult)
+                            addLocation(newLocation: completionResult)
+                            
+                            
                         }, label: { Text("\(completionResult.city), \(completionResult.country)")
                         })
                             
@@ -50,6 +71,24 @@ struct LocationView: View {
         
         
         
+    }
+    
+    private func addLocation(newLocation: CityResult) {
+        var isUnique = true
+        //ensures that there are no duplicates added to the recentLocations
+        recentLocations.forEach { location in
+            isUnique = location.city != newLocation.city && isUnique && location.country != newLocation.country
+        }
+        if isUnique {
+            modelContext.insert(newLocation)
+        }
+        
+    }
+    
+    private func deleteLocation(offsets: IndexSet) {
+        for index in offsets {
+            modelContext.delete(recentLocations[index])
+        }
     }
 }
 
