@@ -22,15 +22,19 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Image(systemName: "location.fill")
-                    Text(viewModel.placeName ?? "")
+                    Text(viewModel.placeName ?? "").multilineTextAlignment(.center)
                 }.onTapGesture {
                     shouldPresentLocationSheet.toggle()
                 }.sheet(isPresented: $shouldPresentLocationSheet, onDismiss: {
                     
                 }, content: {
                     LocationView(locationSearchService: LocationSearchService(), callback: { result in
-                        debugPrint(result)
-                        viewModel.setLocation(newLocation: CLLocationCoordinate2D(latitude: result.latitude, longitude: result.longitude), placeName: result.city)
+                        if let result = result {
+                            viewModel.setLocation(newLocation: CLLocationCoordinate2D(latitude: result.latitude, longitude: result.longitude), placeName: result.city)
+                        } else {
+                            viewModel.shouldUseLocationManager = true
+                            viewModel.refreshData()
+                        }
                         shouldPresentLocationSheet.toggle()
                     })
                 })

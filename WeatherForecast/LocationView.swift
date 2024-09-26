@@ -11,34 +11,33 @@ struct LocationView: View {
     
     @ObservedObject var locationSearchService: LocationSearchService
     
-    var callback: (CityResult) -> Void
+    var callback: (CityResult?) -> Void
     
     @State private var searchText = ""
     
     var body: some View {
         VStack {
             NavigationSplitView {
-                if locationSearchService.searchResults.isEmpty {
-                    List {
-                        Text("München")
-                        Text("Röhrmoos ")
-                        Text("Vierkirchen")
+                Button(action: {
+                    self.callback(nil)
+                }, label: {
+                    HStack {
+                        Image(systemName: "location.fill")
+                        Text("Current Location")
                     }
-                }
+                })
+                
                 List {
                     ForEach(locationSearchService.searchResults, id: \.self) { completionResult in
                         //Text(completionResult.city)
                         Button(action: {
                             self.callback(completionResult)
-                        }, label: { Text(completionResult.city)
+                        }, label: { Text("\(completionResult.city), \(completionResult.country)")
                         })
                             
                     }
                 }
                 .searchable(text: $locationSearchService.queryFragment)
-                
-                
-
             } detail: {
                 Text("Select a place")
                     .navigationTitle("Weather")

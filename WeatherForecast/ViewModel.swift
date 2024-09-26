@@ -24,15 +24,15 @@ class ViewModel: ObservableObject {
             if(locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedAlways || locationManager.manager.authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse) {
                 locationManager.lookUpCurrentLocation { place in
                     if place != nil {
-                        self.placeName = (place?.locality ?? "") + ", " + (place?.administrativeArea ?? "")
+                        self.placeName = (place?.locality ?? "")
                     }
                     if place == nil && self.placeName == nil {
-                        self.placeName = "Cupertino, CA"
+                        self.placeName = "Cupertino"
                     }
                     self.fetchData(place: place?.location?.coordinate)
                 }
             } else {
-                self.placeName = "Cupertino, CA"
+                self.placeName = "Cupertino"
                 self.fetchData(place: CLLocationCoordinate2D(latitude: 37.3230, longitude: -122.0322))
             }
             debugPrint("placeName: " + (self.placeName ?? "No placename found"))
