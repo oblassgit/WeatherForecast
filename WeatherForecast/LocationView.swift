@@ -77,7 +77,7 @@ struct LocationView: View {
         var isUnique = true
         //ensures that there are no duplicates added to the recentLocations
         recentLocations.forEach { location in
-            isUnique = location.city != newLocation.city && isUnique && location.country != newLocation.country
+            isUnique = (location.city != newLocation.city || location.country != newLocation.country) && isUnique
         }
         if isUnique {
             modelContext.insert(newLocation)
