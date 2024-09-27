@@ -68,23 +68,7 @@ class LocationSearchService: NSObject, ObservableObject {
     }
     
     func getLocations(result: MKLocalSearchCompletion, completion: @escaping ([CityResult]) -> Void)
-    {
-        /*let request = MKLocalSearch.Request(completion: result)
-         let search = MKLocalSearch(request: request)
-         search.start
-         {
-         (response, error) in
-         guard let response = response else { /* error! */ }
-         
-         for item in response.mapItems
-         {
-         if let location = item.placemark.location
-         {
-         // You have your location
-         }
-         }
-         }*/
-        
+    {        
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -104,12 +88,13 @@ class LocationSearchService: NSObject, ObservableObject {
                     
                     let city = item.placemark.locality ?? ""
                     var country = item.placemark.country ?? ""
+                    let administrativeArea = item.placemark.administrativeArea ?? ""
                     if country.isEmpty {
                         country = item.placemark.countryCode ?? ""
                     }
                     
                     if !city.isEmpty {
-                        let cityResult = CityResult(city: city, country: country, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        let cityResult = CityResult(city: city, country: country, administrativeArea: administrativeArea, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         self.tmpSearchResults.append(cityResult)
                     }
                 }
@@ -118,8 +103,8 @@ class LocationSearchService: NSObject, ObservableObject {
         
         
         dispatchGroup.notify(queue: .main) {
-            let tmpResults = self.tmpSearchResults.filter { $0.city.lowercased().contains(self.queryFragment.lowercased()) == true}            
-            completion(tmpResults.unique{$0.city + $0.country})
+            let tmpResults = self.tmpSearchResults.filter { $0.city.lowercased().contains(self.queryFragment.lowercased()) == true}
+            completion(tmpResults.unique{$0.city + $0.administrativeArea + $0.country})
         }
         
     }
@@ -128,11 +113,6 @@ class LocationSearchService: NSObject, ObservableObject {
 
 extension LocationSearchService: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        debugPrint("Result changed!")
-        // Depending on what you're searching, you might need to filter differently or
-        // remove the filter altogether. Filtering for an empty Subtitle seems to filter
-        // out a lot of places and only shows cities and countries.
-        //self.searchResults = completer.results //.filter({ $0.subtitle == "" })
         completer.results.forEach { result in
             getLocations(result: result) { cityResults in
                 DispatchQueue.main.async {
@@ -156,13 +136,15 @@ extension LocationSearchService: MKLocalSearchCompleterDelegate {
 final class CityResult: Hashable {
         var city: String
         var country: String
+        var administrativeArea: String
         var latitude: Double
         var longitude: Double
     
     
-    init(city: String, country: String, latitude: Double, longitude: Double) {
+    init(city: String, country: String, administrativeArea: String, latitude: Double, longitude: Double) {
         self.city = city
         self.country = country
+        self.administrativeArea = administrativeArea
         self.latitude = latitude
         self.longitude = longitude
     }

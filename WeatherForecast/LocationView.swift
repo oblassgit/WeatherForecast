@@ -38,7 +38,7 @@ struct LocationView: View {
                             Button(action: {
                                 self.callback(location)
                                 
-                            }, label: { Text("\(location.city), \(location.country)")
+                            }, label: { Text("\(location.city), \(location.administrativeArea.isEmpty ? "" : location.administrativeArea + ", ")\(location.country)")
                             })
                         }.onDelete(perform: { indexSet in
                             deleteLocation(offsets: indexSet)
@@ -53,7 +53,8 @@ struct LocationView: View {
                             addLocation(newLocation: completionResult)
                             
                             
-                        }, label: { Text("\(completionResult.city), \(completionResult.country)")
+                        }, label: {
+                            Text("\(completionResult.city), \(completionResult.administrativeArea.isEmpty ? "" : completionResult.administrativeArea + ", ")\(completionResult.country)")
                         })
                             
                     }
@@ -77,7 +78,7 @@ struct LocationView: View {
         var isUnique = true
         //ensures that there are no duplicates added to the recentLocations
         recentLocations.forEach { location in
-            isUnique = (location.city != newLocation.city || location.country != newLocation.country) && isUnique
+            isUnique = (location.city != newLocation.city || location.country != newLocation.country || location.administrativeArea != newLocation.administrativeArea) && isUnique
         }
         if isUnique {
             modelContext.insert(newLocation)
