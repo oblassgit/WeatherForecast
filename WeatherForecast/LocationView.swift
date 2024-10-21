@@ -32,34 +32,33 @@ struct LocationView: View {
                         Text("Current Location")
                     }
                 })
-                if locationSearchService.searchResults.isEmpty {
-                    List {
-                        ForEach(recentLocations, id: \.self) { location in
-                            Button(action: {
-                                self.callback(location)
-                                
-                            }, label: { Text("\(location.city), \(location.administrativeArea.isEmpty ? "" : location.administrativeArea + ", ")\(location.country)")
-                            })
-                        }.onDelete(perform: { indexSet in
-                            deleteLocation(offsets: indexSet)
-                        })
-                    }
-                }
                 
-                List {
-                    ForEach(locationSearchService.searchResults, id: \.self) { completionResult in
-                        Button(action: {
-                            self.callback(completionResult)
-                            addLocation(newLocation: completionResult)
-                            
-                            
-                        }, label: {
-                            Text("\(completionResult.city), \(completionResult.administrativeArea.isEmpty ? "" : completionResult.administrativeArea + ", ")\(completionResult.country)")
-                        })
-                            
-                    }
-                }
-                .searchable(text: $locationSearchService.queryFragment)
+                    List {
+                        if locationSearchService.searchResults.isEmpty {
+                            ForEach(recentLocations, id: \.self) { location in
+                                Button(action: {
+                                    self.callback(location)
+                                    
+                                }, label: { Text("\(location.city), \(location.administrativeArea.isEmpty ? "" : location.administrativeArea + ", ")\(location.country)")
+                                })
+                            }.onDelete(perform: { indexSet in
+                                deleteLocation(offsets: indexSet)
+                            })
+                        } else {
+                            ForEach(locationSearchService.searchResults, id: \.self) { completionResult in
+                                Button(action: {
+                                    self.callback(completionResult)
+                                    addLocation(newLocation: completionResult)
+                                    
+                                    
+                                }, label: {
+                                    Text("\(completionResult.city), \(completionResult.administrativeArea.isEmpty ? "" : completionResult.administrativeArea + ", ")\(completionResult.country)")
+                                })
+                                    
+                            }
+                        }
+                    }.searchable(text: $locationSearchService.queryFragment)
+                
             } detail: {
                 Text("Select a place")
                     .navigationTitle("Weather")
@@ -80,6 +79,7 @@ struct LocationView: View {
         recentLocations.forEach { location in
             isUnique = (location.city != newLocation.city || location.country != newLocation.country || location.administrativeArea != newLocation.administrativeArea) && isUnique
         }
+        
         if isUnique {
             modelContext.insert(newLocation)
         }

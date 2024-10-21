@@ -89,12 +89,13 @@ class LocationSearchService: NSObject, ObservableObject {
                     let city = item.placemark.locality ?? ""
                     var country = item.placemark.country ?? ""
                     let administrativeArea = item.placemark.administrativeArea ?? ""
+                    let postalCode = item.placemark.postalCode ?? ""
                     if country.isEmpty {
                         country = item.placemark.countryCode ?? ""
                     }
                     
                     if !city.isEmpty {
-                        let cityResult = CityResult(city: city, country: country, administrativeArea: administrativeArea, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        let cityResult = CityResult(city: city, country: country, administrativeArea: administrativeArea, postalCode: postalCode, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         self.tmpSearchResults.append(cityResult)
                     }
                 }
@@ -104,7 +105,7 @@ class LocationSearchService: NSObject, ObservableObject {
         
         dispatchGroup.notify(queue: .main) {
             let tmpResults = self.tmpSearchResults.filter { $0.city.lowercased().contains(self.queryFragment.lowercased()) == true}
-            completion(tmpResults.unique{$0.city + $0.administrativeArea + $0.country})
+            completion(tmpResults.unique{$0.city + $0.administrativeArea + $0.country + $0.postalCode})
         }
         
     }
@@ -137,15 +138,26 @@ final class CityResult: Hashable {
         var city: String
         var country: String
         var administrativeArea: String
+        var postalCode: String
         var latitude: Double
         var longitude: Double
     
     
-    init(city: String, country: String, administrativeArea: String, latitude: Double, longitude: Double) {
+    init(city: String, country: String, administrativeArea: String, postalCode: String, latitude: Double, longitude: Double) {
         self.city = city
         self.country = country
         self.administrativeArea = administrativeArea
+        self.postalCode = postalCode
         self.latitude = latitude
         self.longitude = longitude
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(city)
+        hasher.combine(country)
+        hasher.combine(administrativeArea)
+        hasher.combine(postalCode)
+        hasher.combine(latitude)
+        hasher.combine(longitude)
     }
 }
