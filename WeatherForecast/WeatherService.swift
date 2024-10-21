@@ -127,9 +127,7 @@ class WeatherService {
                     if let hourly = data.hourly {
                         var isDay = false
                         var isDayHourly: [Bool] = []
-                        
-                        debugPrint(response.timezoneAbbreviation)
-                        
+                                                
                         var localToSystemTimeOffset: Int {
                             /*var offset = 0
                             let offsetFromGMTToSystem = TimeZone.current.secondsFromGMT()
