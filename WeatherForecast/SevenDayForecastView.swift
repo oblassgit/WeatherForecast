@@ -26,22 +26,26 @@ struct SevenDayForecastView: View {
                 .padding(.horizontal)
             ScrollView(.horizontal, showsIndicators: false){
                 
+                
+                if let data = data {
+                    if !data.isEmpty {
                 HStack{
-                    if let data = data {
-                        if !data.isEmpty {
+                    
                             ForEach(0 ..< data.count) { value in
                                 let day = data[value]
                                 DayForecast(day: value == 0 ? "Today" : day.date ?? "??", high: Int(day.maxTemp ?? 0), low: Int(day.minTemp ?? 0), isDay: day.isDay ?? false, wmoCode: day.dailyWeatherCode ?? -1)
                             }
-                        }
+                        }.padding(.horizontal)
+
                     }
+                } else {
+                    Spacer()
                 }
-                .padding(.horizontal)
             }
             
             
         }
-        .frame(minHeight: 125)
+        .frame(minHeight: 125, maxHeight: 300)
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white)
@@ -94,6 +98,12 @@ struct DayForecast: View {
 #Preview {
     
     SevenDayForecastView(data: SampleMyWeatherData().getSampleData())
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.blue)
+}
+
+#Preview("empty") {
+    SevenDayForecastView(data: nil)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.blue)
 }
