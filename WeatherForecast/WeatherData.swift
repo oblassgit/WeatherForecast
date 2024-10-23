@@ -22,11 +22,13 @@ struct WeatherData {
         let windSpeed: Float
         let windDirection: Float
         let uvIndex: Float
+        let precipitation: Float
     }
     struct Hourly {
         let temperature2m: [Float]
         let weatherCode: [Int]
         let isDay: [Float]
+        let precipitation: [Float]
     }
     struct Daily {
         let time: [Date]

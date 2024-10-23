@@ -21,12 +21,15 @@
 		075566F02C8EEAB70032F133 /* WeatherIconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075566EF2C8EEAB70032F133 /* WeatherIconService.swift */; };
 		075566F82C92CE8D0032F133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075566F72C92CE8D0032F133 /* Launch Screen.storyboard */; };
 		075566FA2C9314CA0032F133 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075566F92C9314CA0032F133 /* DateFormatterService.swift */; };
+		07618A462CA431F7000E9EAA /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07618A452CA431F7000E9EAA /* LocationView.swift */; };
+		07618A482CA43FF7000E9EAA /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07618A472CA43FF7000E9EAA /* LocationSearchService.swift */; };
 		07632A9D2C88F667007685A4 /* BetterWmoCodesNight.json in Resources */ = {isa = PBXBuildFile; fileRef = 07632A9C2C88F667007685A4 /* BetterWmoCodesNight.json */; };
 		07632A9F2C899F7F007685A4 /* BetterWmoCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 07632A9E2C899F7F007685A4 /* BetterWmoCodes.json */; };
 		0773B3D62C75E1AA00D3762A /* GlassyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */; };
 		0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */; };
 		0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */; };
 		0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778D1BC2C6C91FF006AE037 /* LocationManager.swift */; };
+		07946DA52CC91208007DBF2F /* PrecipitationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */; };
 		07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB549C2C875C7D000991D0 /* ViewModel.swift */; };
 		07FB54A32C88586A000991D0 /* WmoCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB54A22C88586A000991D0 /* WmoCodeService.swift */; };
 /* End PBXBuildFile section */
@@ -65,12 +68,15 @@
 		075566EF2C8EEAB70032F133 /* WeatherIconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconService.swift; sourceTree = "<group>"; };
 		075566F72C92CE8D0032F133 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		075566F92C9314CA0032F133 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
+		07618A452CA431F7000E9EAA /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		07618A472CA43FF7000E9EAA /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		07632A9C2C88F667007685A4 /* BetterWmoCodesNight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BetterWmoCodesNight.json; sourceTree = "<group>"; };
 		07632A9E2C899F7F007685A4 /* BetterWmoCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BetterWmoCodes.json; sourceTree = "<group>"; };
 		0773B3D52C75E1AA00D3762A /* GlassyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassyCardView.swift; sourceTree = "<group>"; };
 		0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayForecastView.swift; sourceTree = "<group>"; };
 		0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMyWeatherData.swift; sourceTree = "<group>"; };
 		0778D1BC2C6C91FF006AE037 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationChartView.swift; sourceTree = "<group>"; };
 		07E6E9262C6B795D00ECD6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07FB549C2C875C7D000991D0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		07FB54A22C88586A000991D0 /* WmoCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WmoCodeService.swift; sourceTree = "<group>"; };
@@ -144,6 +150,9 @@
 				075566EF2C8EEAB70032F133 /* WeatherIconService.swift */,
 				075566F72C92CE8D0032F133 /* Launch Screen.storyboard */,
 				075566F92C9314CA0032F133 /* DateFormatterService.swift */,
+				07618A452CA431F7000E9EAA /* LocationView.swift */,
+				07618A472CA43FF7000E9EAA /* LocationSearchService.swift */,
+				07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -319,12 +328,15 @@
 				07FB54A32C88586A000991D0 /* WmoCodeService.swift in Sources */,
 				072403162C64AF4100145106 /* WeatherService.swift in Sources */,
 				0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */,
+				07618A482CA43FF7000E9EAA /* LocationSearchService.swift in Sources */,
 				0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */,
 				0773B3D62C75E1AA00D3762A /* GlassyCardView.swift in Sources */,
 				072403182C64E9A900145106 /* WeatherData.swift in Sources */,
 				075566F02C8EEAB70032F133 /* WeatherIconService.swift in Sources */,
+				07618A462CA431F7000E9EAA /* LocationView.swift in Sources */,
 				0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */,
 				072402AF2C63903F00145106 /* WeatherForecastApp.swift in Sources */,
+				07946DA52CC91208007DBF2F /* PrecipitationChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
