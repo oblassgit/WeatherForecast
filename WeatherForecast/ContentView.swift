@@ -78,6 +78,9 @@ struct ContentView: View {
                 GlassyCardView(viewDescription: "sunset", iconName: "sunset.fill", smallIconName: "", bigText: viewModel.data?.first?.sunsetTime ?? "00:00", smallText: "", showSmall: false, unit: "")
                     .padding(.trailing)
             }
+            PrecipitationChartView( precipitationArray: Array(viewModel.data?.first?.hourlyPrecipitation.prefix(25) ?? [0.0,0.0]), startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentPercip: viewModel.data?.first?.precipitation ?? 0.0)
+                .padding(.horizontal)
+            
             if viewModel.data != nil {
                 Text("Last updated at \(DateFormatterService().hhmmDateFormatter.string(from: viewModel.data?.first?.dateObj ?? .distantPast))")
             }

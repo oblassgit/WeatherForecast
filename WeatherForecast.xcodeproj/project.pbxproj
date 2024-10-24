@@ -29,6 +29,7 @@
 		0773B4FA2C80AE6F00D3762A /* SevenDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */; };
 		0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */; };
 		0778D1BD2C6C91FF006AE037 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778D1BC2C6C91FF006AE037 /* LocationManager.swift */; };
+		07946DA52CC91208007DBF2F /* PrecipitationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */; };
 		07FB549D2C875C7D000991D0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB549C2C875C7D000991D0 /* ViewModel.swift */; };
 		07FB54A32C88586A000991D0 /* WmoCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB54A22C88586A000991D0 /* WmoCodeService.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		0773B4F92C80AE6F00D3762A /* SevenDayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDayForecastView.swift; sourceTree = "<group>"; };
 		0773B4FB2C80B13300D3762A /* SampleMyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMyWeatherData.swift; sourceTree = "<group>"; };
 		0778D1BC2C6C91FF006AE037 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationChartView.swift; sourceTree = "<group>"; };
 		07E6E9262C6B795D00ECD6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07FB549C2C875C7D000991D0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		07FB54A22C88586A000991D0 /* WmoCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WmoCodeService.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				075566F92C9314CA0032F133 /* DateFormatterService.swift */,
 				07618A452CA431F7000E9EAA /* LocationView.swift */,
 				07618A472CA43FF7000E9EAA /* LocationSearchService.swift */,
+				07946DA42CC91208007DBF2F /* PrecipitationChartView.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				07618A462CA431F7000E9EAA /* LocationView.swift in Sources */,
 				0773B4FC2C80B13300D3762A /* SampleMyWeatherData.swift in Sources */,
 				072402AF2C63903F00145106 /* WeatherForecastApp.swift in Sources */,
+				07946DA52CC91208007DBF2F /* PrecipitationChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
