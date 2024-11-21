@@ -50,21 +50,17 @@ class LocationSearchService: NSObject, ObservableObject {
         self.searchCompleter.delegate = self
         self.searchCompleter.resultTypes = MKLocalSearchCompleter.ResultType([.address])
         
-        queryCancellable = $queryFragment
-            .receive(on: DispatchQueue.main)
-        // we're debouncing the search, because the search completer is rate limited.
-        // feel free to play with the proper value here
-            .debounce(for: .milliseconds(250), scheduler: RunLoop.main, options: nil)
-            .sink(receiveValue: { fragment in
-                self.status = .isSearching
-                if !fragment.isEmpty && self.queryFragment.count >= 3 {
-                    self.searchCompleter.queryFragment = fragment
-                } else {
-                    self.tmpSearchResults = []
-                    self.status = .idle
-                    self.searchResults = []
-                }
-            })
+    }
+    
+    func search() -> Void {
+        self.status = .isSearching
+        if !queryFragment.isEmpty {
+            self.searchCompleter.queryFragment = queryFragment
+        } else {
+            self.tmpSearchResults = []
+            self.status = .idle
+            self.searchResults = []
+        }
     }
     
     func getLocations(result: MKLocalSearchCompletion, completion: @escaping ([CityResult]) -> Void)

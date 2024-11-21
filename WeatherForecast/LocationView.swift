@@ -34,7 +34,7 @@ struct LocationView: View {
                 })
                 
                     List {
-                        if locationSearchService.searchResults.isEmpty {
+                        if locationSearchService.searchResults.isEmpty || locationSearchService.queryFragment.isEmpty {
                             ForEach(recentLocations, id: \.self) { location in
                                 Button(action: {
                                     self.callback(location)
@@ -58,6 +58,11 @@ struct LocationView: View {
                             }
                         }
                     }.searchable(text: $locationSearchService.queryFragment)
+                    .onSubmit(of: .search) {
+                        debugPrint(locationSearchService.queryFragment)
+                        locationSearchService.search()
+                    }
+                
                 
             } detail: {
                 Text("Select a place")
