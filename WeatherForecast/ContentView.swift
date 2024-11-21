@@ -13,11 +13,33 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) var scenePhase
     
+    @State var shouldPresentLocationSheet = false
+    
     var body: some View {
         
                 
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
+                HStack {
+                    Image(systemName: "location.fill").foregroundStyle(viewModel.shouldUseLocationManager ? .blue : .primary)
+                    Text(viewModel.placeName ?? "").multilineTextAlignment(.center)
+                }.onTapGesture {
+                    shouldPresentLocationSheet.toggle()
+                }.sheet(isPresented: $shouldPresentLocationSheet, onDismiss: {
+                    
+                }, content: {
+                    LocationView(locationSearchService: LocationSearchService(), callback: { result in
+                        if let result = result {
+                            viewModel.setLocation(newLocation: CLLocationCoordinate2D(latitude: result.latitude, longitude: result.longitude), placeName: result.city)
+                            viewModel.refreshData()
+                        } else {
+                            viewModel.shouldUseLocationManager = true
+                            viewModel.refreshData()
+                        }
+                        shouldPresentLocationSheet.toggle()
+                    })
+                })
+                
                 let isDay = viewModel.data?.first?.isDay ?? false
 
                 
@@ -56,6 +78,9 @@ struct ContentView: View {
                 GlassyCardView(viewDescription: "sunset", iconName: "sunset.fill", smallIconName: "", bigText: viewModel.data?.first?.sunsetTime ?? "00:00", smallText: "", showSmall: false, unit: "")
                     .padding(.trailing)
             }
+            PrecipitationChartView( precipitationArray: Array(viewModel.data?.first?.hourlyPrecipitation.prefix(25) ?? [0.0,0.0]), startDate: Calendar.current.startOfDay(for: .now), currentDate: .now, currentPercip: viewModel.data?.first?.precipitation ?? 0.0)
+                .padding(.horizontal)
+            
             if viewModel.data != nil {
                 Text("Last updated at \(DateFormatterService().hhmmDateFormatter.string(from: viewModel.data?.first?.dateObj ?? .distantPast))")
             }
@@ -72,7 +97,6 @@ struct ContentView: View {
         .background(Gradient(colors: [.backgroundColor1, .backgroundColor3, .backgroundColor2]).opacity(0.8))
         
         .onAppear(perform: {
-            viewModel.refreshData()
         }).onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
                 debugPrint("scenePhase: Active")
@@ -102,11 +126,6 @@ struct TodayForecastView: View {
         
         VStack {
             
-            
-            HStack {
-                Image(systemName: "location.fill")
-                Text(viewModel.placeName ?? "")
-            }
             Text(" \(Int(data?.first?.temp?.rounded() ?? 0.0))°")
                 .font(Font.system(size: 60))
                 .padding(1)

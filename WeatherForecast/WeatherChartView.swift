@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 import Foundation
 
-struct HourlyData : Identifiable {
+fileprivate struct HourlyData : Identifiable {
     var id = UUID()
     
     var date: Date
@@ -40,7 +40,7 @@ struct WeatherChartView: View {
     
     
     
-    var data: [HourlyData] {
+    fileprivate var data: [HourlyData] {
         var array: [HourlyData] = []
         var i = 0
         var isDay: Bool?
