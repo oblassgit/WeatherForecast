@@ -29,6 +29,16 @@
         "image":"cloud.fog.fill"
     },
     {
+        "id": "48",
+        "description":"Foggy",
+        "image":"cloud.fog.fill"
+    },
+    {
+        "id": "49",
+        "description":"Foggy",
+        "image":"cloud.fog.fill"
+    },
+    {
         "id": "51",
         "description":"Light Drizzle",
         "image":"cloud.drizzle.fill"
@@ -130,7 +140,7 @@
     },
     {
         "id": "99",
-        "description":"Light Thunderstorm With Hail",
+        "description":"Heavy Thunderstorm With Hail",
         "image":"cloud.bolt.rain.fill"
     }
 ]
